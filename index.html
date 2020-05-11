@@ -60,6 +60,11 @@
     // Get inputs from the DOM
     var passwordInput = document.querySelector('#password');
     var passwordCheckbox = document.querySelector('#show-password');
+
+    // Listen for click event
+    passwordCheckbox.addEventListener('click', function (event) {
+      console.log('clicked');
+    });
   </script>
 </body>
 
