@@ -63,7 +63,17 @@
 
     // Listen for click event
     passwordCheckbox.addEventListener('click', function (event) {
-      console.log('clicked');
+      // Check each item in the array
+      passwordInputs.forEach(function (password) {
+        // If checkbox is checked...
+        if (event.target.checked) {
+          // Show password
+          password.type = 'text';
+        } else {
+          // Hide password
+          password.type = 'password';
+        }
+      });
     });
   </script>
 </body>
