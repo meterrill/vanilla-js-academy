@@ -61,8 +61,10 @@
     var passwordInputs = Array.prototype.slice.call(document.querySelectorAll('.password'));
     var passwordCheckbox = document.querySelector('#show-passwords');
 
-    console.log(passwordInputs);
-    console.log(passwordCheckbox);
+    // Listen for click event
+    passwordCheckbox.addEventListener('click', function (event) {
+      console.log('clicked');
+    });
   </script>
 </body>
 
