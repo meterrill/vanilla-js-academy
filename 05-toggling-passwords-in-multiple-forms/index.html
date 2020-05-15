@@ -90,6 +90,18 @@
     var passwords = Array.prototype.slice.call(document.querySelectorAll('[type="password"]'));
     var changeUsernameCheckbox = document.querySelector('#show-password');
     var changePasswordCheckbox = document.querySelector('#show-passwords');
+
+    // Listen for click events
+    document.addEventListener('click', function (event) {
+      if (event.target.matches('#show-password')) {
+        console.log('change username');
+      }
+
+      if (event.target.matches('#show-passwords')) {
+        console.log('change password');
+      }
+    }, false);
+
   </script>
 </body>
 
