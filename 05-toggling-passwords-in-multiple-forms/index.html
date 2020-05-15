@@ -48,7 +48,7 @@
 
     <div>
       <label for="show-password">
-        <input type="checkbox" name="show-password" id="show-password">
+        <input type="checkbox" name="show-password" id="show-password" data-checkbox>
         Show password
       </label>
     </div>
@@ -75,7 +75,7 @@
 
     <div>
       <label for="show-passwords">
-        <input type="checkbox" name="show-passwords" id="show-passwords">
+        <input type="checkbox" name="show-passwords" id="show-passwords" data-checkbox>
         Show passwords
       </label>
     </div>
@@ -88,23 +88,7 @@
   <script>
     // Listen for click events
     document.addEventListener('click', function (event) {
-      if (event.target.matches('#show-password')) {
-        // Select closest form element
-        var form = event.target.closest('form');
-        // Select password inputs 
-        var passwords = Array.prototype.slice.call(form.querySelectorAll('[data-password]'));
-
-        // Show/hide password
-        passwords.forEach(function (password) {
-          if (event.target.checked) {
-            password.type = 'text';
-          } else {
-            password.type = 'password';
-          }
-        });
-      }
-
-      if (event.target.matches('#show-passwords')) {
+      if (event.target.matches('[data-checkbox]')) {
         // Select closest form element
         var form = event.target.closest('form');
         // Select password inputs 
@@ -120,7 +104,6 @@
         });
       }
     }, false);
-
   </script>
 </body>
 
