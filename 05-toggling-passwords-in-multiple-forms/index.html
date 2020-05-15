@@ -87,22 +87,43 @@
 
   <script>
     // Get inputs from the DOM
-    var passwords = Array.prototype.slice.call(document.querySelectorAll('[type="password"]'));
     var changeUsernameCheckbox = document.querySelector('#show-password');
     var changePasswordCheckbox = document.querySelector('#show-passwords');
 
     // Listen for click events
     document.addEventListener('click', function (event) {
-      // Select closest form element
       if (event.target.matches('#show-password')) {
+        // Select closest form element
         var form = changeUsernameCheckbox.closest('form');
-        console.log(form);
+        // Select password inputs 
+        var passwords = Array.prototype.slice.call(form.querySelectorAll('[type="password"]'));
+        console.log(passwords);
+
+        // Show/hide password
+        passwords.forEach(function (password) {
+          if (event.target.checked) {
+            password.type = 'text';
+          } else {
+            password.type = 'password';
+          }
+        });
       }
 
       if (event.target.matches('#show-passwords')) {
         // Select closest form element
         var form = changePasswordCheckbox.closest('form');
-        console.log(form);
+        // Select password inputs 
+        var passwords = Array.prototype.slice.call(form.querySelectorAll('[type="password"]'));
+        console.log(passwords);
+
+        // Show/hide password
+        passwords.forEach(function (password) {
+          if (event.target.checked) {
+            password.type = 'text';
+          } else {
+            password.type = 'password';
+          }
+        });
       }
     }, false);
 
