@@ -86,15 +86,11 @@
   </form>
 
   <script>
-    // Get inputs from the DOM
-    var changeUsernameCheckbox = document.querySelector('#show-password');
-    var changePasswordCheckbox = document.querySelector('#show-passwords');
-
     // Listen for click events
     document.addEventListener('click', function (event) {
       if (event.target.matches('#show-password')) {
         // Select closest form element
-        var form = changeUsernameCheckbox.closest('form');
+        var form = event.target.closest('form');
         // Select password inputs 
         var passwords = Array.prototype.slice.call(form.querySelectorAll('[data-password]'));
 
@@ -110,7 +106,7 @@
 
       if (event.target.matches('#show-passwords')) {
         // Select closest form element
-        var form = changePasswordCheckbox.closest('form');
+        var form = event.target.closest('form');
         // Select password inputs 
         var passwords = Array.prototype.slice.call(form.querySelectorAll('[data-password]'));
 
