@@ -96,8 +96,7 @@
         // Select closest form element
         var form = changeUsernameCheckbox.closest('form');
         // Select password inputs 
-        var passwords = Array.prototype.slice.call(form.querySelectorAll('[type="password"]'));
-        console.log(passwords);
+        var passwords = Array.prototype.slice.call(form.querySelectorAll('[data-password]'));
 
         // Show/hide password
         passwords.forEach(function (password) {
@@ -113,8 +112,7 @@
         // Select closest form element
         var form = changePasswordCheckbox.closest('form');
         // Select password inputs 
-        var passwords = Array.prototype.slice.call(form.querySelectorAll('[type="password"]'));
-        console.log(passwords);
+        var passwords = Array.prototype.slice.call(form.querySelectorAll('[data-password]'));
 
         // Show/hide password
         passwords.forEach(function (password) {
