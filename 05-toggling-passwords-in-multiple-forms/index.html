@@ -93,12 +93,16 @@
 
     // Listen for click events
     document.addEventListener('click', function (event) {
+      // Select closest form element
       if (event.target.matches('#show-password')) {
-        console.log('change username');
+        var form = changeUsernameCheckbox.closest('form');
+        console.log(form);
       }
 
       if (event.target.matches('#show-passwords')) {
-        console.log('change password');
+        // Select closest form element
+        var form = changePasswordCheckbox.closest('form');
+        console.log(form);
       }
     }, false);
 
