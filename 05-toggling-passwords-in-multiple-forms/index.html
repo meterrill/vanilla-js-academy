@@ -86,14 +86,14 @@
   </form>
 
   <script crossorigin="anonymous"
-    src="https://polyfill.io/v3/polyfill.min.js?features=Element.prototype.matches%2CElement.prototype.closest"></script>
+    src="https://polyfill.io/v3/polyfill.min.js?features=Element.prototype.matches"></script>
 
   <script>
     // Listen for click events
     document.addEventListener('click', function (event) {
       if (event.target.matches('[data-checkbox]')) {
         // Select closest form element
-        var form = event.target.closest('form');
+        var form = event.target.form;
         // Select password inputs 
         var passwords = Array.prototype.slice.call(form.querySelectorAll('[data-password]'));
 
