@@ -36,6 +36,11 @@
     // Get textarea#text and span#character-count
     var text = document.querySelector('#text');
     var characterCount = document.querySelector('#character-count');
+
+    // Listen for input on the textarea
+    text.addEventListener('input', function () {
+      console.log(text.value);
+    });
   </script>
 </body>
 
