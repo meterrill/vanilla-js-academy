@@ -33,17 +33,14 @@
   <p>You've written <strong><span id="character-count">0</span> characters</strong>.</p>
 
   <script>
-    // Get textarea#text and span#character-count
+    // Get textarea and span elements
     var text = document.querySelector('#text');
     var characterCount = document.querySelector('#character-count');
 
     // Listen for input on the textarea
     text.addEventListener('input', function () {
-      // Get the length of the value in the textarea
-      var textLength = text.value.length;
-
-      // Write the text length to the DOM
-      characterCount.textContent = textLength;
+      // Get the length of the value in the textarea and update the DOM
+      characterCount.textContent = text.value.length;
     });
   </script>
 </body>
