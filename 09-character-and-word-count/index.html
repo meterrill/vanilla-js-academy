@@ -41,6 +41,9 @@
 
     // Listen for input on the textarea
     text.addEventListener('input', function () {
+      // Create an array of words from the textarea
+      wordArray = text.value.split(' ');
+
       // Get the length of the value in the textarea and update the DOM
       characterCount.textContent = text.value.length;
     });
