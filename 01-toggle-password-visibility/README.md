@@ -1,6 +1,6 @@
 # Toggle Password Visibility
 
-Write a script that let’s users toggle the visibility of a password field.
+Write a script that lets users toggle the visibility of a password field.
 
 ## Links
 

@@ -1,6 +1,6 @@
 # Toggling multiple password fields
 
-Write a script that let’s users toggle the visibility of multiple password fields.
+Write a script that lets users toggle the visibility of multiple password fields.
 
 ## Links
 
