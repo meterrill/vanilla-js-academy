@@ -47,6 +47,8 @@
       var wordsArray = stringsArray.filter(function (string) {
         return string.length > 0;
       });
+      // Update the word count in the DOM
+      wordCount.textContent = wordsArray.length;
 
       // Get the length of the value in the textarea and update the DOM
       characterCount.textContent = text.value.length;
