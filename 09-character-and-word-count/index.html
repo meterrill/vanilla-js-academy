@@ -41,7 +41,8 @@
 
     // Listen for input on the textarea
     text.addEventListener('input', function () {
-
+      // Get the length of the value in the textarea and update the DOM
+      characterCount.textContent = text.value.length;
     });
   </script>
 </body>
