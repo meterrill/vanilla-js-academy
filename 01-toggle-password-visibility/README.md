@@ -1,4 +1,4 @@
-# Project: Toggle Password Visibility
+# Toggle Password Visibility
 
 Write a script that let’s users toggle the visibility of a password field.
 
