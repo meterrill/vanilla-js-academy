@@ -4,7 +4,7 @@
 
 ## Links
 
-[Website](https://meterrill.github.io/vanilla-js-academy/)
+[Project Demos](https://meterrill.github.io/vanilla-js-academy/)
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
