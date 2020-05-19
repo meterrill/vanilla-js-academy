@@ -42,7 +42,7 @@
     // Listen for input on the textarea
     text.addEventListener('input', function () {
       // Create an array of strings from the textarea
-      var stringsArray = text.value.split(' ');
+      var stringsArray = text.value.split(/\s+/);
       // Filter empty values from the array of strings
       var wordsArray = stringsArray.filter(function (string) {
         return string.length > 0;
