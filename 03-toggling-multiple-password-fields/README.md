@@ -1,2 +1,10 @@
-# toggling-multiple-password-fields
-Chris Ferdinandi - Go Make Things - Vanilla JS Academy - Toggling multiple password fields
+# Toggling multiple password fields
+
+Write a script that let’s users toggle the visibility of multiple password fields.
+
+## Links
+
+[Demo](https://meterrill.github.io/vanilla-js-academy/03-toggling-multiple-password-fields/)
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
