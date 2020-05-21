@@ -38,7 +38,7 @@
     var text = document.querySelector('#text');
     var countText = document.querySelector('#count-text');
     var wordCount = document.querySelector('#word-count');
-    var charCount = document.querySelector('#character-count');
+    var characterCount = document.querySelector('#character-count');
 
     // Listen for changes to the text area content
     text.addEventListener('input', function () {
@@ -48,11 +48,14 @@
         return word.length > 0;
       });
 
-      // Display the word count
-      wordCount.textContent = words.length;
+      // Update the word count
+      var wordCount = words.length;
 
-      // Display the characters count
-      charCount.textContent = text.value.length;
+      // Update the characters count
+      var characterCount = text.value.length;
+
+      // Update the count text in the DOM
+      countText.textContent = 'You\'ve written ' + wordCount + ' words and ' + characterCount + ' characters.'
 
     }, false);
   </script>
