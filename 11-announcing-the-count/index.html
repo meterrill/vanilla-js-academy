@@ -48,11 +48,17 @@
       // Update the word count
       var wordCount = words.length;
 
-      // Update the characters count
+      // Update the word label
+      var wordLabel = wordCount === 1 ? 'word' : 'words';
+
+      // Update the character count
       var characterCount = text.value.length;
 
+      // Update the character label
+      var characterLabel = characterCount === 1 ? 'character' : 'characters';
+
       // Update the count text in the DOM
-      countText.textContent = 'You\'ve written ' + wordCount + ' words and ' + characterCount + ' characters.'
+      countText.textContent = 'You\'ve written ' + wordCount + ' ' + wordLabel + ' and ' + characterCount + ' ' + characterLabel + '.'
 
     }, false);
   </script>
