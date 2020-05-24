@@ -27,6 +27,22 @@
     // Get the blockquote and button elements
     var blockquote = document.querySelector('blockquote');
     var button = document.querySelector('button');
+
+    // Get a quote from the API
+    fetch('http://ron-swanson-quotes.herokuapp.com/v2/quotes').then(function (response) {
+      // Check for successful API call
+      if (response.ok) {
+        return response.json();
+      } else {
+        return Promise.reject(response);
+      }
+    }).then(function (data) {
+      // Log the JSON from our response
+      console.log(data);
+    }).catch(function (err) {
+      // Output a warning message on error
+      console.warn('Something went wrong.', err);
+    });
   </script>
 </body>
 
