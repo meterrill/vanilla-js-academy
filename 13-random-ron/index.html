@@ -30,7 +30,7 @@
 
     function getQuote() {
       // Get a quote from the API
-      fetch('http://ron-swanson-quotes.herokuapp.com/v2/quotes').then(function (response) {
+      fetch('https://ron-swanson-quotes.herokuapp.com/v2/quotes').then(function (response) {
         // Check for successful API call
         if (response.ok) {
           return response.json();
