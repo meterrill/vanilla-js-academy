@@ -28,21 +28,28 @@
     var quote = document.querySelector('blockquote');
     var button = document.querySelector('button');
 
-    // Get a quote from the API
-    fetch('http://ron-swanson-quotes.herokuapp.com/v2/quotes').then(function (response) {
-      // Check for successful API call
-      if (response.ok) {
-        return response.json();
-      } else {
-        return Promise.reject(response);
-      }
-    }).then(function (data) {
-      // Add the JSON from our response to the DOM
-      quote.textContent = data.toString();
-    }).catch(function (err) {
-      // Output a warning message on error
-      console.warn('Something went wrong.', err);
-    });
+    function getQuote() {
+      // Get a quote from the API
+      fetch('http://ron-swanson-quotes.herokuapp.com/v2/quotes').then(function (response) {
+        // Check for successful API call
+        if (response.ok) {
+          return response.json();
+        } else {
+          return Promise.reject(response);
+        }
+      }).then(function (data) {
+        // Add the JSON from our response to the DOM
+        quote.textContent = data.toString();
+      }).catch(function (err) {
+        // Output a warning message on error
+        console.warn('Something went wrong.', err);
+      });
+    }
+
+    // Listen for a click on the button
+    button.addEventListener('click', getQuote);
+
+    getQuote();
   </script>
 </body>
 
