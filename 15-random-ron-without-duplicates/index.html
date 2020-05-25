@@ -23,7 +23,7 @@
 
   <h1>Random Ron - No Duplicates</h1>
 
-  <img alt="A photo of Ron Swanson" src="http://giphygifs.s3.amazonaws.com/media/iofbYa67AbBg4/giphy.gif">
+  <img alt="A photo of Ron Swanson" src="https://giphygifs.s3.amazonaws.com/media/iofbYa67AbBg4/giphy.gif">
 
   <blockquote id="quote" aria-live="polite">
     <em>Getting a fresh quote...</em>
@@ -37,6 +37,7 @@
     // Get the blockquote and button elements
     var quote = document.querySelector('#quote');
     var btn = document.querySelector('#get-quote');
+    var quoteHistory = [];
 
     // Get a fresh quote and render it into the DOM
     var getQuote = function () {
@@ -49,6 +50,11 @@
         }
       }).then(function (data) {
         quote.textContent = data[0];
+
+        // Save current quote into an array
+        quoteHistory.push(data[0]);
+
+        console.log(quoteHistory);
       }).catch(function (error) {
         quote.textContent = '[Something went wrong, sorry!] I have a joke for you... The government in this town is excellent, and uses your tax dollars efficiently.';
       });
