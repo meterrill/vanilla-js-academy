@@ -50,13 +50,15 @@
         }
       }).then(function (data) {
         var currentQuote = data[0];
-        quote.textContent = currentQuote;
 
         // If the current quote exists in the history array
         if (quoteHistory.indexOf(currentQuote) > -1) {
           // Get a new quote
           getQuote();
         } else {
+          // Add the current quote to the DOM
+          quote.textContent = currentQuote;
+
           // Save the current quote into the history array
           quoteHistory.push(currentQuote);
 
