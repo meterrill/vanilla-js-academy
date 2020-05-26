@@ -52,15 +52,18 @@
         var currentQuote = data[0];
         quote.textContent = currentQuote;
 
-        // Check if current quote exists in history
+        // If the current quote exists in the history array
         if (quoteHistory.indexOf(currentQuote) > -1) {
-          console.log('Quote already exists');
-
           // Get a new quote
           getQuote();
         } else {
-          // Save current quote into an array
+          // Save the current quote into the history array
           quoteHistory.push(currentQuote);
+
+          // Cap the length of the history array at 50
+          if (quoteHistory.length > 50) {
+            quoteHistory = quoteHistory.slice(1, 51);
+          }
         }
 
         console.log(quoteHistory);
