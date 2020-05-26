@@ -49,10 +49,19 @@
           return Promise.reject(response);
         }
       }).then(function (data) {
-        quote.textContent = data[0];
+        var currentQuote = data[0];
+        quote.textContent = currentQuote;
 
-        // Save current quote into an array
-        quoteHistory.push(data[0]);
+        // Check if current quote exists in history
+        if (quoteHistory.indexOf(currentQuote) > -1) {
+          console.log('Quote already exists');
+
+          // Get a new quote
+          getQuote();
+        } else {
+          // Save current quote into an array
+          quoteHistory.push(currentQuote);
+        }
 
         console.log(quoteHistory);
       }).catch(function (error) {
