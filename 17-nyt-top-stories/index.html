@@ -20,8 +20,21 @@
   <div id="app"></div>
 
   <script>
-    // Get #app element
+    // Get the #app element
     var app = document.querySelector('#app');
+
+    // Fetch the top stories from the API
+    function getStories() {
+      fetch('https://api.nytimes.com/svc/topstories/v2/home.json?api-key=0q2Pwnu4SiIy7UxplCJ745E0PGRohgVb').then(function (response) {
+        return response.ok ? response.json() : Promise.reject(response);
+      }).then(function (data) {
+        console.log(data);
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+
+    getStories();
   </script>
 </body>
 
