@@ -29,23 +29,31 @@
     var endpoint = 'https://api.nytimes.com/svc/topstories/v2/home.json?api-key=';
     var apiKey = '0q2Pwnu4SiIy7UxplCJ745E0PGRohgVb';
 
-    // Fetch the stories from the API
-    function getStories() {
-      fetch(endpoint + apiKey).then(function (response) {
-        return response.ok ? response.json() : Promise.reject(response);
-      }).then(function (data) {
-        var stories = data.results;
-
-        // Add the stories to the DOM
-        app.innerHTML = '<ul>' + stories.map(function (story) {
-          return '<li><a href="' + story.url + '">' + story.title + '</a></li>';
-        }).join('') + '</ul>';
-      }).catch(function (error) {
-        console.log(error);
-      });
+    // Get the JSON from the API
+    function getJSON(response) {
+      return response.ok ? response.json() : Promise.reject(response);
     }
 
-    getStories();
+    // Add the stories to the DOM
+    function showStories(data) {
+      var stories = data.results;
+
+      app.innerHTML = '<ul>' + stories.map(function (story) {
+        return '<li><a href="' + story.url + '">' + story.title + '</a></li>';
+      }).join('') + '</ul>';
+    }
+
+    // Add an error message to the DOM
+    function showError(error) {
+      app.innerHTML = '<p>We\'re experiencing some technical difficulties. Please try again later or view today\'s top stories directly on <a href="https://www.nytimes.com/">The New York Times</a> website.</p>';
+    }
+
+    // Fetch the stories from the API and add them to the DOM
+    fetch(endpoint + apiKey)
+      .then(getJSON)
+      .then(showStories)
+      .catch(showError);
+
   </script>
 </body>
 
