@@ -25,9 +25,13 @@
     // Get the #app element
     var app = document.querySelector('#app');
 
+    // Store the endpoint and API key
+    var endpoint = 'https://api.nytimes.com/svc/topstories/v2/home.json?api-key=';
+    var apiKey = '0q2Pwnu4SiIy7UxplCJ745E0PGRohgVb';
+
     // Fetch the stories from the API
     function getStories() {
-      fetch('https://api.nytimes.com/svc/topstories/v2/home.json?api-key=0q2Pwnu4SiIy7UxplCJ745E0PGRohgVb').then(function (response) {
+      fetch(endpoint + apiKey).then(function (response) {
         return response.ok ? response.json() : Promise.reject(response);
       }).then(function (data) {
         var stories = data.results;
