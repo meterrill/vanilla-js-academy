@@ -62,9 +62,9 @@
           // Save the current quote into the history array
           quoteHistory.push(currentQuote);
 
-          // Cap the length of the history array at 50
+          // Limit the length of the history array to 50 quotes
           if (quoteHistory.length > 50) {
-            quoteHistory = quoteHistory.slice(1, 51);
+            quoteHistory.shift();
           }
         }
       }).catch(function (error) {
