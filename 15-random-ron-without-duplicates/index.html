@@ -43,11 +43,7 @@
     var getQuote = function () {
       // Get a Ron Swanson quote
       fetch('https://ron-swanson-quotes.herokuapp.com/v2/quotes').then(function (response) {
-        if (response.ok) {
-          return response.json();
-        } else {
-          return Promise.reject(response);
-        }
+        return response.ok ? response.json() : Promise.reject(response);
       }).then(function (data) {
         var currentQuote = data[0];
 
