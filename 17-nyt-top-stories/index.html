@@ -2,89 +2,10 @@
 <html>
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NYT Top Stories</title>
-
-  <style type="text/css">
-    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&family=Roboto:wght@300&display=swap');
-
-    body {
-      font-family: 'Open Sans', sans-serif;
-      margin: 1em auto;
-      max-width: 1200px;
-      width: 90%;
-    }
-
-    img {
-      max-width: 100%;
-    }
-
-    h1 {
-      font-size: 3em;
-      text-align: center;
-    }
-
-    h2 {
-      font-size: 1.25em;
-      text-transform: uppercase;
-      margin: 0 0 .5em;
-      color: #999;
-    }
-
-    h3 {
-      font-size: 1.5em;
-      color: #000;
-    }
-
-    a {
-      text-decoration: none;
-    }
-
-    p {
-      font-family: 'Roboto', sans-serif;
-      color: #333;
-    }
-
-    time {
-      font-size: .875em;
-      color: #999;
-    }
-
-    @media (max-width: 599px) {
-      article+article {
-        padding-top: 2.5em;
-        border-top: 1px solid #999;
-        margin-top: 2.5em;
-      }
-    }
-
-    @media (min-width: 600px) {
-      #app {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0 30px;
-      }
-    }
-
-    @media (min-width: 600px) and (max-width: 899px) {
-      article:nth-child(n+3) {
-        padding-top: 2.5em;
-        border-top: 1px solid #999;
-        margin-top: 2.5em;
-      }
-    }
-
-    @media (min-width: 900px) {
-      #app {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      article:nth-child(n+4) {
-        padding-top: 2.5em;
-        border-top: 1px solid #999;
-        margin-top: 2.5em;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -93,53 +14,13 @@
 
   <div id="app">
     <p>
+      <span>Visit </span>
       <a href="https://www.nytimes.com/">The New York Times</a>
     </p>
-    <img src="" alt="">
   </div>
 
-  <script>
-    // Get the #app element
-    var app = document.querySelector('#app');
+  <script src="script.js"></script>
 
-    // Store the endpoint and API key
-    var endpoint = 'https://api.nytimes.com/svc/topstories/v2/home.json?api-key=';
-    var apiKey = '0q2Pwnu4SiIy7UxplCJ745E0PGRohgVb';
-
-    // Get the JSON from the API
-    function getJSON(response) {
-      return response.ok ? response.json() : Promise.reject(response);
-    }
-
-    // Add the stories to the DOM
-    function showStories(stories) {
-      app.innerHTML = stories.results.map(function (story) {
-        return (
-          '<article>' +
-          '<h2>' + story.section + '</h2>' +
-          '<a href="' + story.url + '">' +
-          '<img src="' + story.multimedia[0].url + '" alt="' + story.multimedia[0].caption + '">' +
-          '<h3>' + story.title + '</h3>' +
-          '<p>' + story.abstract + '</p>' +
-          '<time datetime="' + story.published_date + '">' + new Date(story.published_date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) + '</time>' +
-          '</a>' +
-          '</article>'
-        );
-      }).join('');
-    }
-
-    // Add an error message to the DOM
-    function showError(error) {
-      app.innerHTML = '<p>We\'re experiencing some technical difficulties. Please try again later or view today\'s top stories directly on <a href="https://www.nytimes.com/">The New York Times</a> website.</p>';
-    }
-
-    // Fetch the stories from the API and add them to the DOM
-    fetch(endpoint + apiKey)
-      .then(getJSON)
-      .then(showStories)
-      .catch(showError);
-
-  </script>
 </body>
 
 </html>
