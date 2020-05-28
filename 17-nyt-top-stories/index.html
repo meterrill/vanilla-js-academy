@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>What to read today</title>
+  <title>NYT Top Stories</title>
 
   <style type="text/css">
     body {
@@ -10,15 +10,22 @@
       max-width: 40em;
       width: 88%;
     }
+
+    img {
+      max-width: 100%;
+    }
   </style>
 </head>
 
 <body>
 
-  <h1>What to read today</h1>
+  <h1>NYT Top Stories</h1>
 
   <div id="app">
-    <a href="https://www.nytimes.com/">The New York Times</a>
+    <p>
+      <a href="https://www.nytimes.com/">The New York Times</a>
+    </p>
+    <img src="" alt="">
   </div>
 
   <script>
@@ -38,9 +45,19 @@
     function showStories(data) {
       var stories = data.results;
 
-      app.innerHTML = '<ul>' + stories.map(function (story) {
-        return '<li><a href="' + story.url + '">' + story.title + '</a></li>';
-      }).join('') + '</ul>';
+      app.innerHTML = stories.map(function (story) {
+        return (
+          '<article>' +
+          '<p>' + story.section + '</p>' +
+          '<a href="' + story.url + '">' +
+          '<img src="' + story.multimedia[0].url + '" alt="' + story.multimedia[0].caption + '">' +
+          '<h2>' + story.title + '</h2>' +
+          '<p>' + story.abstract + '</p>' +
+          '<time datetime="' + story.published_date + '">' + new Date(story.published_date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) + '</time>' +
+          '</a>' +
+          '</article>'
+        );
+      }).join('');
     }
 
     // Add an error message to the DOM
