@@ -2,13 +2,13 @@
 var app = document.querySelector('#app');
 
 // Store the sections, endpoint, and API key
-var sections = ['arts', 'automobiles', 'books', 'business', 'fashion', 'food', 'health', 'home', 'insider', 'magazine', 'movies', 'nyregion', 'obituaries', 'opinion', 'politics', 'realestate', 'science', 'sports', 'sundayreview', 'technology', 'theater', 't - magazine', 'travel', 'upshot', 'us', 'world']
+var sections = ['world', 'us', 'sports', 'technology']
 var endpoint = 'https://api.nytimes.com/svc/topstories/v2/home.json?api-key=';
 var apiKey = '0q2Pwnu4SiIy7UxplCJ745E0PGRohgVb';
 
 // Fetch the stories from the API
-function getStories(section) {
-  fetch(endpoint + apiKey).then(function (response) {
+function getStories(section, endpoint) {
+  fetch(endpoint).then(function (response) {
     return response.ok ? response.json() : Promise.reject(response);
   }).then(function (data) {
     app.innerHTML += '<section>' + 
@@ -35,5 +35,7 @@ function getStories(section) {
 
 // Get stories for each section
 sections.forEach(function (section) {
-  getStories(section);
+  endpoint = 'https://api.nytimes.com/svc/topstories/v2/' + section + '.json?api-key=' + apiKey;
+
+  getStories(section, endpoint);
 });
