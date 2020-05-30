@@ -1,7 +1,8 @@
 // Get the #app element
 var app = document.querySelector('#app');
 
-// Store the endpoint and API key
+// Store the sections, endpoint, and API key
+var sections = ['arts', 'automobiles', 'books', 'business', 'fashion', 'food', 'health', 'home', 'insider', 'magazine', 'movies', 'nyregion', 'obituaries', 'opinion', 'politics', 'realestate', 'science', 'sports', 'sundayreview', 'technology', 'theater', 't - magazine', 'travel', 'upshot', 'us', 'world']
 var endpoint = 'https://api.nytimes.com/svc/topstories/v2/home.json?api-key=';
 var apiKey = '0q2Pwnu4SiIy7UxplCJ745E0PGRohgVb';
 
