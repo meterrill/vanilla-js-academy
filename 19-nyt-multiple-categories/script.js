@@ -10,9 +10,9 @@ function getJSON(response) {
   return response.ok ? response.json() : Promise.reject(response);
 }
 
-// Add the stories to the DOM
+// Add the first 3 stories to the DOM
 function showStories(stories) {
-  app.innerHTML = stories.results.map(function (story) {
+  app.innerHTML = stories.results.slice(0, 3).map(function (story) {
     return (
       '<article>' +
       // '<h2>' + story.section + '</h2>' +
