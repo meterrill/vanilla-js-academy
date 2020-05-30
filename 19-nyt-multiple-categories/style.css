@@ -52,7 +52,7 @@ time {
 }
 
 @media (min-width: 600px) {
-  #app {
+  #app > section > div {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 0 30px;
@@ -68,7 +68,7 @@ time {
 }
 
 @media (min-width: 900px) {
-  #app {
+  #app > section > div {
     grid-template-columns: repeat(3, 1fr);
   }
 

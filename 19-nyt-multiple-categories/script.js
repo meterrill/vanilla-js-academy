@@ -11,12 +11,11 @@ function getJSON(response) {
   return response.ok ? response.json() : Promise.reject(response);
 }
 
-// Add the first 3 stories to the DOM
-function showStories(stories) {
-  app.innerHTML = stories.results.slice(0, 3).map(function (story) {
+// Add a section w/ heading and the first 3 stories to the DOM
+function showSection(data) {
+  app.innerHTML = data.results.slice(0, 3).map(function (story) {
     return (
       '<article>' +
-      // '<h2>' + story.section + '</h2>' +
       '<a href="' + story.url + '">' +
       '<img src="' + story.multimedia[0].url + '" alt="' + story.multimedia[0].caption + '">' +
       '<h3>' + story.title + '</h3>' +
@@ -24,8 +23,12 @@ function showStories(stories) {
       '<time datetime="' + story.published_date + '">' + new Date(story.published_date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) + '</time>' +
       '</a>' +
       '</article>'
-    );
-  }).join('');
+      );
+    }).join('');
+    
+  app.innerHTML = '<section>' + '<h2>' + 'Heading' + '</h2>' + '<div>' + app.innerHTML;
+
+  app.innerHTML += '</div>' + '</section>';
 }
 
 // Add an error message to the DOM
@@ -36,5 +39,5 @@ function showError(error) {
 // Fetch the stories from the API and add them to the DOM
 fetch(endpoint + apiKey)
   .then(getJSON)
-  .then(showStories)
+  .then(showSection)
   .catch(showError);
