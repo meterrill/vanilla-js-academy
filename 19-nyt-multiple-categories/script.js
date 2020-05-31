@@ -12,7 +12,9 @@ function getStories(section, endpoint) {
     return response.ok ? response.json() : Promise.reject(response);
   }).then(function (data) {
     app.innerHTML += '<section>' + 
-      '<h2>' + section + '</h2>' + 
+      '<h2>' + 
+      '<a href="https://www.nytimes.com/section/' + section + '">' + section + '</a>' + 
+      '</h2>' + 
       '<div>' + 
       data.results.slice(0, 3).map(function (story) {
         return (

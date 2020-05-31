@@ -22,8 +22,17 @@ h2 {
   text-align: center;
   text-transform: uppercase;
   margin: 0 0 1.5em;
-  background: #999;
+}
+
+h2 > a {
+  display: block;
+  background-color: #999;
   color: #fff;
+  transition: background-color .2s ease-in-out;
+}
+
+h2 > a:hover {
+  background-color: #000;
 }
 
 h3 {
