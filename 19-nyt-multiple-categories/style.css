@@ -18,15 +18,24 @@ h1 {
 
 h2 {
   font-size: 1.25em;
+  line-height: 1.5;
+  text-align: center;
   text-transform: uppercase;
-  margin: 0 0 .5em;
-  color: #999;
+  margin: 0 0 1.5em;
+  background: #999;
+  color: #fff;
 }
 
 h3 {
   font-size: 1.5em;
   line-height: 1.25;
   color: #000;
+}
+
+section+section {
+  padding-top: 2.5em;
+  border-top: 1px solid #999;
+  margin-top: 2.5em;
 }
 
 a {
@@ -60,10 +69,8 @@ time {
 }
 
 @media (min-width: 600px) and (max-width: 899px) {
-  article:nth-child(n+3) {
-    padding-top: 2.5em;
-    border-top: 1px solid #999;
-    margin-top: 2.5em;
+  article:last-child {
+    display: none;
   }
 }
 
