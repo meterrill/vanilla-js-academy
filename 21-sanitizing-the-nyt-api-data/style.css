@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&family=Roboto:wght@300&display=swap');
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  margin: 1em auto;
+  max-width: 1200px;
+  width: 90%;
+}
+
+img {
+  max-width: 100%;
+}
+
+h1 {
+  font-size: 3em;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.25em;
+  line-height: 1.5;
+  text-align: center;
+  text-transform: uppercase;
+  margin: 0 0 1.5em;
+}
+
+h2 > a {
+  display: block;
+  background-color: #999;
+  color: #fff;
+  transition: background-color .2s ease-in-out;
+}
+
+h2 > a:hover {
+  background-color: #000;
+}
+
+h3 {
+  font-size: 1.5em;
+  line-height: 1.25;
+  color: #000;
+}
+
+section+section {
+  padding-top: 2.5em;
+  border-top: 1px solid #999;
+  margin-top: 2.5em;
+}
+
+a {
+  text-decoration: none;
+}
+
+p {
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+}
+
+time {
+  font-size: .875em;
+  color: #999;
+}
+
+@media (max-width: 599px) {
+  article+article {
+    padding-top: 2.5em;
+    border-top: 1px solid #999;
+    margin-top: 2.5em;
+  }
+}
+
+@media (min-width: 600px) {
+  #app > section > div {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0 30px;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 899px) {
+  article:last-child {
+    display: none;
+  }
+}
+
+@media (min-width: 900px) {
+  #app > section > div {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  article:nth-child(n+4) {
+    padding-top: 2.5em;
+    border-top: 1px solid #999;
+    margin-top: 2.5em;
+  }
+}
