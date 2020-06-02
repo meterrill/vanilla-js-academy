@@ -14,4 +14,5 @@ var monsters = [
   'sock'
 ];
 
-// Your code goes here...
+// Get the #app element
+var app = document.querySelector('#app');
