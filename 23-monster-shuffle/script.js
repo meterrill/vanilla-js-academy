@@ -16,3 +16,12 @@ var monsters = [
 
 // Get the #app element
 var app = document.querySelector('#app');
+
+// Display monsters in the DOM
+app.innerHTML = `<div class="row">
+                  ${monsters.map(function(monster) {
+                    return `<div class="grid">
+                      <img src="img/${monster}.svg" alt="${monster}">
+                    </div>`
+                  }).join('')}
+                </div>`;
