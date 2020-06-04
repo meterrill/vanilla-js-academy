@@ -25,3 +25,7 @@ img {
   height: auto;
   max-width: 100%;
 }
+
+.grid > img {
+  display: none;
+}

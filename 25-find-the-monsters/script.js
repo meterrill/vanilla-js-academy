@@ -86,8 +86,11 @@ shuffle(monsters);
 // Display monsters in the DOM
 app.innerHTML = `<div class="row">
                   ${monsters.map(function (monster) {
-  return `<div class="grid">
+                    return `<div class="grid">
+                      <button>
+                        <img src="img/door.svg" alt="Click to open the door.">
+                      </button>
                       <img src="img/${monster.src}.svg" alt="${monster.alt}">
                     </div>`
-}).join('')}
+                  }).join('')}
                 </div>`;
