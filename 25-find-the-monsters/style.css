@@ -9,13 +9,17 @@ body {
   */
 .row {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: repeat(3, 1fr);
   text-align: center;
 }
 
 .grid {
   min-height: 6em;
   padding: 1em;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /**
@@ -24,9 +28,4 @@ body {
 img {
   height: auto;
   max-width: 100%;
-  margin: 0 auto;
-}
-
-.grid > img {
-  display: none;
 }
