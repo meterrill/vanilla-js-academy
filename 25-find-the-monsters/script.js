@@ -97,6 +97,8 @@ app.innerHTML = `<div class="row">
 
 app.addEventListener('click', function(event) {
   if (event.target.matches('.door')) {
-    console.log(event.target);
+    var selected = event.target.closest('.grid');
+    selected.querySelector('button').style.display = 'none';
+    selected.querySelector('.monster').style.display = 'block';
   }
 }); 
