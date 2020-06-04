@@ -88,9 +88,15 @@ app.innerHTML = `<div class="row">
                   ${monsters.map(function (monster) {
                     return `<div class="grid">
                       <button>
-                        <img src="img/door.svg" alt="Click to open the door.">
+                        <img class="door" src="img/door.svg" alt="Click to open the door.">
                       </button>
-                      <img src="img/${monster.src}.svg" alt="${monster.alt}">
+                      <img class="monster" src="img/${monster.src}.svg" alt="${monster.alt}">
                     </div>`
                   }).join('')}
                 </div>`;
+
+app.addEventListener('click', function(event) {
+  if (event.target.matches('.door')) {
+    console.log(event.target);
+  }
+}); 
