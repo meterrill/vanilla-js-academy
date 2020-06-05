@@ -2,6 +2,9 @@ body {
   margin: 1em auto;
   max-width: 40em;
   width: 88%;
+
+  background: url('img/stars.jpg') #1a2336;
+  color: #fff;
 }
 
 /**
@@ -33,7 +36,30 @@ img {
 /**
   * Style buttons to not look like buttons
   */
-[data-index] {
-  background-color: transparent;
-  border: 0;
+  [data-index] {
+    background-color: transparent;
+    border: 0;
+  }
+  
+/**
+  * Style flashlight for cursor
+  */
+.flashlight {
+  position: absolute;
+  top: -150px;
+  left: -150px;
+  z-index: -1;
+  height: 150px;
+  width: 150px;
+  border-radius: 75px;
+  background-color: rgba(252, 243, 189, .9);
+  box-shadow: 0 0 50px #fcf3bd;
+}
+
+.light {
+  filter: brightness(100);
+}
+
+footer a {
+  color: #fff;
 }

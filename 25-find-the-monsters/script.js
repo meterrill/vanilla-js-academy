@@ -53,6 +53,9 @@ var monsters = [
 // Get the #app element
 var app = document.querySelector('#app');
 
+// Get the #flashlight element
+var flashlight = document.querySelector('#flashlight');
+
 /**
  * Randomly shuffle an array
  * https://stackoverflow.com/a/2450976/1293256
@@ -89,7 +92,7 @@ app.innerHTML = `<p>Click a door to reveal a monster. Try not to find the socks.
                   ${shuffledMonsters.map(function (monster, index) {
                     return `<div class="grid" aria-live="polite">
                       <button data-index="${index}">
-                        <img src="img/door.svg" alt="Click to open the door.">
+                        <img class="light" src="img/door.svg" alt="Click to open the door.">
                       </button>
                     </div>`
                   }).join('')}
@@ -108,4 +111,10 @@ app.addEventListener('click', function(event) {
     // Replace the selected door with the corresponding monster
     selectedGrid.innerHTML = `<img src="img/${selectedMonster.src}.svg" alt="${selectedMonster.alt}">`;
   }
+});
+
+// Listen for mouse movement
+window.addEventListener('mousemove', function(event) {
+  flashlight.style.top = (event.pageY - 75) + 'px';
+  flashlight.style.left = (event.pageX - 75) + 'px';
 });
