@@ -84,11 +84,12 @@ var shuffle = function (array) {
 var shuffledMonsters = shuffle(monsters);
 
 // Display a door in the DOM for each monster
-app.innerHTML = `<div class="row">
+app.innerHTML = `<p>Click a door to reveal a monster. Try not to find the socks.</p>
+                <div class="row">
                   ${shuffledMonsters.map(function (monster, index) {
-                    return `<div class="grid">
-                      <button>
-                        <img data-index="${index}" src="img/door.svg" alt="Click to open the door.">
+                    return `<div class="grid" aria-live="polite">
+                      <button data-index="${index}">
+                        <img src="img/door.svg" alt="Click to open the door.">
                       </button>
                     </div>`
                   }).join('')}
@@ -96,12 +97,14 @@ app.innerHTML = `<div class="row">
 
 // Listen for clicks on the doors
 app.addEventListener('click', function(event) {
+  // Get the element or closest parent with a [data-index] attribute
+  var selectedDoor = event.target.closest('[data-index]');
   // If the selected element has a data-index attribute
-  if (event.target.matches('[data-index]')) {
+  if (selectedDoor) {
+    // Get the corresponding monster
+    var selectedMonster = shuffledMonsters[selectedDoor.dataset.index];
     // Get the closest .grid element
     var selectedGrid = event.target.closest('.grid');
-    // Get the corresponding monster
-    var selectedMonster = shuffledMonsters[event.target.dataset.index];
     // Replace the selected door with the corresponding monster
     selectedGrid.innerHTML = `<img src="img/${selectedMonster.src}.svg" alt="${selectedMonster.alt}">`;
   }

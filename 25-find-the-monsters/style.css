@@ -29,3 +29,11 @@ img {
   height: auto;
   max-width: 100%;
 }
+
+/**
+  * Style buttons to not look like buttons
+  */
+[data-index] {
+  background-color: transparent;
+  border: 0;
+}
