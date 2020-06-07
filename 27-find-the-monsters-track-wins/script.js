@@ -62,6 +62,9 @@ var resultModal = document.querySelector('#resultModal');
 // Get #resultMessage element
 var resultMessage = document.querySelector('#resultMessage');
 
+// Get #play-again element
+var playAgain = document.querySelector('#play-again');
+
 /**
  * Randomly shuffle an array
  * https://stackoverflow.com/a/2450976/1293256
@@ -89,25 +92,30 @@ var shuffle = function (array) {
 
 };
 
+function showGame() {
+  // Shuffle monsters
+  shuffle(monsters);
+  
+  // Display a door in the DOM for each monster
+  app.innerHTML = `<p>Click a door to reveal a monster. Try not to find the socks.</p>
+                  <div class="row">
+                    ${monsters.map(function (monster, index) {
+                      return `<div class="grid" aria-live="polite">
+                        <button data-index="${index}">
+                          <img src="img/door.svg" alt="Click to open the door.">
+                        </button>
+                      </div>`
+                    }).join('')}
+                  </div>`;
+  
+  // Reset count
+  count = 0;
+}  
+
 function showModal(result) {
   resultMessage.innerText = result;
   resultModal.style.display = 'block';
 }
-
-// Shuffle monsters
-var shuffledMonsters = shuffle(monsters);
-
-// Display a door in the DOM for each monster
-app.innerHTML = `<p>Click a door to reveal a monster. Try not to find the socks.</p>
-                <div class="row">
-                  ${shuffledMonsters.map(function (monster, index) {
-                    return `<div class="grid" aria-live="polite">
-                      <button data-index="${index}">
-                        <img src="img/door.svg" alt="Click to open the door.">
-                      </button>
-                    </div>`
-                  }).join('')}
-                </div>`;
 
 // Listen for clicks on the doors
 app.addEventListener('click', function (event) {
@@ -116,7 +124,7 @@ app.addEventListener('click', function (event) {
   // If the selected element has a data-index attribute
   if (selectedDoor) {
     // Get the corresponding monster
-    var selectedMonster = shuffledMonsters[selectedDoor.dataset.index];
+    var selectedMonster = monsters[selectedDoor.dataset.index];
     // Get the closest .grid element
     var selectedGrid = event.target.closest('.grid');
     // Replace the selected door with the corresponding monster
@@ -132,3 +140,10 @@ app.addEventListener('click', function (event) {
     }
   }
 });
+
+playAgain.addEventListener('click', function() {
+  resultModal.style.display = 'none';
+  showGame();
+});
+
+showGame();
