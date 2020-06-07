@@ -50,11 +50,17 @@ var monsters = [
   }
 ];
 
-// Initialize score
-var score = 0;
+// Initialize count
+var count = 0;
 
 // Get the #app element
 var app = document.querySelector('#app');
+
+// Get #resultModal element
+var resultModal = document.querySelector('#resultModal');
+
+// Get #resultMessage element
+var resultMessage = document.querySelector('#resultMessage');
 
 /**
  * Randomly shuffle an array
@@ -82,6 +88,11 @@ var shuffle = function (array) {
   return array;
 
 };
+
+function showModal(result) {
+  resultMessage.innerText = result;
+  resultModal.style.display = 'block';
+}
 
 // Shuffle monsters
 var shuffledMonsters = shuffle(monsters);
@@ -111,12 +122,12 @@ app.addEventListener('click', function (event) {
     // Replace the selected door with the corresponding monster
     selectedGrid.innerHTML = `<img src="img/${selectedMonster.src}.svg" alt="${selectedMonster.alt}">`;
 
-    if (selectedMonster.src === "sock") {
-      console.log('You lose!');
+    if (selectedMonster.src === 'sock') {
+      showModal('You lose!');
     } else {
-      score++;
-      if (score >= (monsters.length - 1)) {
-        console.log('You win!');
+      count++;
+      if (count >= (monsters.length - 1)) {
+        showModal('You win!');
       }
     }
   }
