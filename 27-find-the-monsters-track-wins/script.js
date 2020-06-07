@@ -50,6 +50,9 @@ var monsters = [
   }
 ];
 
+// Initialize score
+var score = 0;
+
 // Get the #app element
 var app = document.querySelector('#app');
 
@@ -87,12 +90,12 @@ var shuffledMonsters = shuffle(monsters);
 app.innerHTML = `<p>Click a door to reveal a monster. Try not to find the socks.</p>
                 <div class="row">
                   ${shuffledMonsters.map(function (monster, index) {
-  return `<div class="grid" aria-live="polite">
+                    return `<div class="grid" aria-live="polite">
                       <button data-index="${index}">
                         <img src="img/door.svg" alt="Click to open the door.">
                       </button>
                     </div>`
-}).join('')}
+                  }).join('')}
                 </div>`;
 
 // Listen for clicks on the doors
@@ -107,5 +110,14 @@ app.addEventListener('click', function (event) {
     var selectedGrid = event.target.closest('.grid');
     // Replace the selected door with the corresponding monster
     selectedGrid.innerHTML = `<img src="img/${selectedMonster.src}.svg" alt="${selectedMonster.alt}">`;
+
+    if (selectedMonster.src === "sock") {
+      console.log('You lose!');
+    } else {
+      score++;
+      if (score >= (monsters.length - 1)) {
+        console.log('You win!');
+      }
+    }
   }
 });
