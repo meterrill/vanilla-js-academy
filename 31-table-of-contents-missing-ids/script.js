@@ -9,6 +9,13 @@ function createID(heading) {
 	heading.id = heading.textContent.replace(/\W+/g, '-').toLowerCase();
 }
 
+// Create a list item/link from heading
+function createLink(heading) {
+	return `<li>
+		<a href="#${heading.id}">${heading.innerText}</a>
+	</li>`;
+}
+
 // Only generate markup if h2 elements exist
 if (headings.length > 0) {
   // Create a list of anchor links and render to the DOM
@@ -19,9 +26,7 @@ if (headings.length > 0) {
 											createID(heading);
 										}
 
-										return `<li>
-											<a href="#${heading.id}">${heading.innerText}</a>
-										</li>`
+										return createLink(heading);
 										}).join('')}
 									</ul>`;
 }
