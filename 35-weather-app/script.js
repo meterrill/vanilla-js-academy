@@ -19,6 +19,7 @@ fetch('https://ipapi.co/json/').then(function(response) {
   // Render current weather to DOM
   app.innerHTML = `
     <h3>Current weather in ${weather.city_name}, ${weather.state_code}</h3>
+    <img src="https://www.weatherbit.io/static/img/icons/${weather.weather.icon}.png" alt="${weather.weather.description}">
     <h2>${tempInFarenheit} (&#8457) / ${weather.temp} (&#8451)</h2>
   `;
 }).catch(function(err) {
