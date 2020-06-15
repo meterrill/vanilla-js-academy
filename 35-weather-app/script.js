@@ -12,7 +12,15 @@ fetch('https://ipapi.co/json/').then(function(response) {
 }).then(function(response) {
   return response.ok ? response.json() : Promise.reject(response);
 }).then(function(weatherData) {
-  console.log(weatherData);
+  // Store the weather data
+  var weather = weatherData.data[0];
+  // Convert temp from Celcius to Farenheit
+  var tempInFarenheit = (weather.temp * 9 / 5) + 32;
+  // Render current weather to DOM
+  app.innerHTML = `
+    <h3>Current weather in ${weather.city_name}, ${weather.state_code}</h3>
+    <h2>${tempInFarenheit} (&#8457) / ${weather.temp} (&#8451)</h2>
+  `;
 }).catch(function(err) {
   console.warn('Something went wrong.' , err);
 });
