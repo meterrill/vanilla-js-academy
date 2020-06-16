@@ -1,14 +1,15 @@
+// Store weather API key
+var apiKey = '418c15fc4a2b4812936ccb24faa2532d';
+
 // Get #app element
 var app = document.querySelector('#app');
 
 // Get user's location
 fetch('https://ipapi.co/json/').then(function(response) {
   return response.ok ? response.json() : Promise.reject(response);
-}).then(function(data) {
-  // Store the location data
-  var location = data;
+}).then(function(locationData) {
   // Get the current weather
-  return fetch(`https://api.weatherbit.io/v2.0/current?city=${location.city},${location.region_code}&key=418c15fc4a2b4812936ccb24faa2532d`);
+  return fetch(`https://api.weatherbit.io/v2.0/current?city=${locationData.city},${locationData.region_code}&key=${apiKey}`);
 }).then(function(response) {
   return response.ok ? response.json() : Promise.reject(response);
 }).then(function(weatherData) {
