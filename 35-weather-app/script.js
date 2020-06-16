@@ -4,6 +4,19 @@ var apiKey = '418c15fc4a2b4812936ccb24faa2532d';
 // Get #app element
 var app = document.querySelector('#app');
 
+// Render current weather to DOM
+function renderWeather(weather) {
+	// Convert temp from Celcius to Farenheit
+	var tempInFarenheit = (weather.temp * 9 / 5) + 32;
+
+	app.innerHTML = `
+		<p>
+			<img src="https://www.weatherbit.io/static/img/icons/${weather.weather.icon}.png" alt="${weather.weather.description}">
+		</p>
+    <p>Current weather in ${weather.city_name}, ${weather.state_code} is ${tempInFarenheit} (&#8457) and ${(weather.weather.description).toLowerCase()}.</p>
+  `;  
+}
+
 // Get user's location
 fetch('https://ipapi.co/json/').then(function(response) {
   return response.ok ? response.json() : Promise.reject(response);
@@ -13,16 +26,8 @@ fetch('https://ipapi.co/json/').then(function(response) {
 }).then(function(response) {
   return response.ok ? response.json() : Promise.reject(response);
 }).then(function(weatherData) {
-  // Store the weather data
-  var weather = weatherData.data[0];
-  // Convert temp from Celcius to Farenheit
-  var tempInFarenheit = (weather.temp * 9 / 5) + 32;
-  // Render current weather to DOM
-  app.innerHTML = `
-    <h3>Current weather in ${weather.city_name}, ${weather.state_code}</h3>
-    <img src="https://www.weatherbit.io/static/img/icons/${weather.weather.icon}.png" alt="${weather.weather.description}">
-    <h2>${tempInFarenheit} (&#8457) / ${weather.temp} (&#8451)</h2>
-  `;
+  // Pass the weather data to renderWeather helper function
+  renderWeather(weatherData.data[0]);
 }).catch(function(error) {
   // Render error message to DOM
   app.textContent = 'Unable to get weather data at this time.';
