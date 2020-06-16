@@ -23,6 +23,8 @@ fetch('https://ipapi.co/json/').then(function(response) {
     <img src="https://www.weatherbit.io/static/img/icons/${weather.weather.icon}.png" alt="${weather.weather.description}">
     <h2>${tempInFarenheit} (&#8457) / ${weather.temp} (&#8451)</h2>
   `;
-}).catch(function(err) {
-  console.warn('Something went wrong.' , err);
+}).catch(function(error) {
+  // Render error message to DOM
+  app.textContent = 'Unable to get weather data at this time.';
+  console.warn(error);
 });
