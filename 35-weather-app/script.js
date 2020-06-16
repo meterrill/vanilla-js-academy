@@ -4,6 +4,18 @@ var apiKey = '418c15fc4a2b4812936ccb24faa2532d';
 // Get #app element
 var app = document.querySelector('#app');
 
+/*!
+ * Sanitize and encode all HTML in a user-submitted string
+ * (c) 2018 Chris Ferdinandi, MIT License, https://gomakethings.com
+ * @param  {String} str  The user-submitted string
+ * @return {String} str  The sanitized string
+ */
+var sanitizeHTML = function (str) {
+	var temp = document.createElement('div');
+	temp.textContent = str;
+	return temp.innerHTML;
+};
+
 // Convert temp from Celcius to Farenheit
 function tempInFarenheit(temp) {
 	return parseInt((temp * 9 / 5) + 32);
@@ -13,9 +25,9 @@ function tempInFarenheit(temp) {
 function renderWeather(weather) {
 	app.innerHTML = `
 		<p>
-			<img src="https://www.weatherbit.io/static/img/icons/${weather.weather.icon}.png" alt="${weather.weather.description}">
+			<img src="https://www.weatherbit.io/static/img/icons/${sanitizeHTML(weather.weather.icon)}.png" alt="${sanitizeHTML(weather.weather.description)}">
 		</p>
-    <p>Current weather in ${weather.city_name}, ${weather.state_code} is ${tempInFarenheit(weather.temp)}&#176 and ${(weather.weather.description).toLowerCase()}.</p>
+    <p>Current weather in ${sanitizeHTML(weather.city_name)}, ${sanitizeHTML(weather.state_code)} is ${tempInFarenheit(sanitizeHTML(weather.temp))}&#176 and ${sanitizeHTML(weather.weather.description).toLowerCase()}.</p>
   `;  
 }
 
