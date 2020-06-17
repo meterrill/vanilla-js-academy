@@ -6,7 +6,7 @@ function getWeather(options) {
     units: 'f', // 'c' for Celcius or 'f' for Fahrenheit
     message: 'Current weather in {{location}} is {{temperature}} and {{conditions}}.',
     noWeather: 'Sorry, unable to get weather data at this time.',
-    icon: true
+    showIcon: true
   };
 
   // Merge user options into defaults
@@ -48,8 +48,8 @@ function getWeather(options) {
   }
   
   // Render icon to DOM
-  function renderIcon(icon, weather) {
-    if (icon) {
+  function renderIcon(weather) {
+    if (settings.showIcon) {
       app.innerHTML = `
         <p>
           <img src="https://www.weatherbit.io/static/img/icons/${sanitizeHTML(weather.weather.icon)}.png" alt="${sanitizeHTML(weather.weather.description)}">
@@ -61,7 +61,7 @@ function getWeather(options) {
   // Render current weather to DOM
   function renderWeather(weather) {
     renderMessage(weather);
-    renderIcon(settings.icon, weather);
+    renderIcon(weather);
   } 
   
   // Render message to DOM if no weather data is available
@@ -97,5 +97,5 @@ getWeather({
   // units: 'c',
   // message: 'It\'s currently {{temperature}} and {{conditions}} in {{location}}.',
   // noWeather: 'Unable to get weather data at this time.',
-//   icon: false
+  // showIcon: false
 });
