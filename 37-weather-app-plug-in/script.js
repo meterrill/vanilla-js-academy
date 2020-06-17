@@ -2,7 +2,7 @@ function getWeather(options) {
   // Default settings
   var defaults = {
     selector: '#app',
-    units: 'fahrenheit',
+    units: 'f',
     message: 'Current weather in {location} is {temperature} and {conditions}.',
     icon: true
   };
@@ -14,7 +14,7 @@ function getWeather(options) {
   var apiKey = '418c15fc4a2b4812936ccb24faa2532d';
   
   // Get #app element
-  var app = document.querySelector('#app');
+  var app = document.querySelector(settings.selector);
   
   /*!
    * Sanitize and encode all HTML in a user-submitted string
@@ -27,22 +27,44 @@ function getWeather(options) {
     temp.textContent = str;
     return temp.innerHTML;
   };
-  
-  // Convert temp from Celcius to Fahrenheit
-  function tempInFahrenheit(temp) {
-    return parseInt((temp * 9 / 5) + 32);
+    
+  // Get temperature in celcius or fahrenheit
+  function getTemp(units, temp) {
+    return parseInt((units === 'c') ? temp : ((temp * 9 / 5) + 32)).toString() + `&#176`;
   }
-  
-  // Render current weather to DOM
-  function renderWeather(weather) {
+
+  // Render message to DOM
+  function renderMessage(message, weather) {
+    var location = `${sanitizeHTML(weather.city_name)}, ${sanitizeHTML(weather.state_code)}`;
+    var temperature = getTemp(settings.units, sanitizeHTML(weather.temp));
+    var conditions = `${sanitizeHTML(weather.weather.description).toLowerCase()}`;
+
     app.innerHTML = `
-      <p>
-        <img src="https://www.weatherbit.io/static/img/icons/${sanitizeHTML(weather.weather.icon)}.png" alt="${sanitizeHTML(weather.weather.description)}">
-      </p>
-      <p>Current weather in ${sanitizeHTML(weather.city_name)}, ${sanitizeHTML(weather.state_code)} is ${tempInFahrenheit(sanitizeHTML(weather.temp))}&#176 and ${sanitizeHTML(weather.weather.description).toLowerCase()}.</p>
+      <p>${message
+        .replace('{location}', location)
+        .replace('{temperature}', temperature)
+        .replace('{conditions}', conditions)
+      }</p>
     `;  
   }
   
+  // Render icon to DOM
+  function renderIcon(icon, weather) {
+    if (icon) {
+      app.innerHTML = `
+        <p>
+          <img src="https://www.weatherbit.io/static/img/icons/${sanitizeHTML(weather.weather.icon)}.png" alt="${sanitizeHTML(weather.weather.description)}">
+        </p>
+      ` + app.innerHTML;
+    }
+  }
+
+  // Render current weather to DOM
+  function renderWeather(weather) {
+    renderMessage(settings.message, weather);
+    renderIcon(settings.icon, weather);
+  }  
+   
   // Get user's location
   fetch('https://ipapi.co/json/').then(function(response) {
     return response.ok ? response.json() : Promise.reject(response);
