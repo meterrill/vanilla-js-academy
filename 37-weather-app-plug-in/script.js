@@ -5,6 +5,7 @@ function getWeather(options) {
     selector: '#app',
     units: 'f', // 'c' for Celcius or 'f' for Fahrenheit
     message: 'Current weather in {{location}} is {{temperature}} and {{conditions}}.',
+    noWeather: 'Sorry, unable to get weather data at this time.',
     icon: true
   };
 
@@ -61,7 +62,12 @@ function getWeather(options) {
   function renderWeather(weather) {
     renderMessage(weather);
     renderIcon(settings.icon, weather);
-  }  
+  } 
+  
+  // Render message to DOM if no weather data is available
+  function renderNoWeather() {
+    app.innerHTML = settings.noWeather;
+  }
 
   // Check for API key
   if(!settings.apiKey) {
@@ -80,10 +86,9 @@ function getWeather(options) {
   }).then(function(weatherData) {
     // Pass the weather data to renderWeather helper function
     renderWeather(weatherData.data[0]);
-  }).catch(function(error) {
+  }).catch(function() {
     // Render error message to DOM
-    app.textContent = 'Unable to get weather data at this time.';
-    console.warn(error);
+    renderNoWeather();
   });
 }
 
@@ -91,5 +96,6 @@ getWeather({
   apiKey: '418c15fc4a2b4812936ccb24faa2532d',
   // units: 'c',
   // message: 'It\'s currently {{temperature}} and {{conditions}} in {{location}}.',
+  // noWeather: 'Unable to get weather data at this time.',
 //   icon: false
 });
