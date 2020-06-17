@@ -83,10 +83,10 @@ function getWeather(options) {
   });
 }
 
-// getWeather();
+getWeather();
 
-getWeather({
-  units: 'c',
-  message: 'It\'s currently {temperature} and {conditions} in {location}.',
-  icon: false
-});
+// getWeather({
+//   units: 'c',
+//   message: 'It\'s currently {temperature} and {conditions} in {location}.',
+//   icon: false
+// });
