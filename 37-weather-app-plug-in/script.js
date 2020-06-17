@@ -1,6 +1,7 @@
 function getWeather(options) {
   // Default settings
   var defaults = {
+    apiKey: null,
     selector: '#app',
     units: 'f',
     message: 'Current weather in {location} is {temperature} and {conditions}.',
@@ -10,9 +11,6 @@ function getWeather(options) {
   // Merge user options into defaults
   var settings = Object.assign(defaults, options);
 
-  // Store weather API key
-  var apiKey = '418c15fc4a2b4812936ccb24faa2532d';
-  
   // Get #app element
   var app = document.querySelector(settings.selector);
   
@@ -64,13 +62,19 @@ function getWeather(options) {
     renderMessage(settings.message, weather);
     renderIcon(settings.icon, weather);
   }  
+
+  // Check for API key
+  if(!settings.apiKey) {
+    console.error('Please provide an API key.');
+    return;
+  }
    
   // Get user's location
   fetch('https://ipapi.co/json/').then(function(response) {
     return response.ok ? response.json() : Promise.reject(response);
   }).then(function(locationData) {
     // Get the current weather
-    return fetch(`https://api.weatherbit.io/v2.0/current?city=${locationData.city},${locationData.region_code}&key=${apiKey}`);
+    return fetch(`https://api.weatherbit.io/v2.0/current?city=${locationData.city},${locationData.region_code}&key=${settings.apiKey}`);
   }).then(function(response) {
     return response.ok ? response.json() : Promise.reject(response);
   }).then(function(weatherData) {
@@ -83,10 +87,9 @@ function getWeather(options) {
   });
 }
 
-getWeather();
-
-// getWeather({
+getWeather({
+  apiKey: '418c15fc4a2b4812936ccb24faa2532d',
 //   units: 'c',
 //   message: 'It\'s currently {temperature} and {conditions} in {location}.',
 //   icon: false
-// });
+});
