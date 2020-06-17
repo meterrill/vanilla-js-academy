@@ -1,4 +1,4 @@
-function getWeather() {
+function getWeather(options) {
   // Default settings
   var defaults = {
     selector: '#app',
@@ -6,6 +6,9 @@ function getWeather() {
     message: 'Current weather in {location} is {temperature} and {conditions}.',
     icon: true
   };
+
+  // Merge user options into defaults
+  var settings = Object.assign(defaults, options);
 
   // Store weather API key
   var apiKey = '418c15fc4a2b4812936ccb24faa2532d';
