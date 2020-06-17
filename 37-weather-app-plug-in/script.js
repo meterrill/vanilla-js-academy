@@ -1,4 +1,12 @@
 function getWeather() {
+  // Default settings
+  var defaults = {
+    selector: '#app',
+    units: 'fahrenheit',
+    message: 'Current weather in {location} is {temperature} and {conditions}.',
+    icon: true
+  };
+
   // Store weather API key
   var apiKey = '418c15fc4a2b4812936ccb24faa2532d';
   
@@ -17,8 +25,8 @@ function getWeather() {
     return temp.innerHTML;
   };
   
-  // Convert temp from Celcius to Farenheit
-  function tempInFarenheit(temp) {
+  // Convert temp from Celcius to Fahrenheit
+  function tempInFahrenheit(temp) {
     return parseInt((temp * 9 / 5) + 32);
   }
   
@@ -28,7 +36,7 @@ function getWeather() {
       <p>
         <img src="https://www.weatherbit.io/static/img/icons/${sanitizeHTML(weather.weather.icon)}.png" alt="${sanitizeHTML(weather.weather.description)}">
       </p>
-      <p>Current weather in ${sanitizeHTML(weather.city_name)}, ${sanitizeHTML(weather.state_code)} is ${tempInFarenheit(sanitizeHTML(weather.temp))}&#176 and ${sanitizeHTML(weather.weather.description).toLowerCase()}.</p>
+      <p>Current weather in ${sanitizeHTML(weather.city_name)}, ${sanitizeHTML(weather.state_code)} is ${tempInFahrenheit(sanitizeHTML(weather.temp))}&#176 and ${sanitizeHTML(weather.weather.description).toLowerCase()}.</p>
     `;  
   }
   
