@@ -1,6 +1,6 @@
 # Announcing the Count
 
-Modify the *character and word* count project to announce the current count to screen reader users as it changes.
+Modify the *character and word count* project to announce the current count to screen reader users as it changes.
 
 ## Links
 
