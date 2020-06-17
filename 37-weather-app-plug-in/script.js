@@ -4,7 +4,7 @@ function getWeather(options) {
     apiKey: null, // Required
     selector: '#app',
     units: 'f', // 'c' for Celcius or 'f' for Fahrenheit
-    message: 'Current weather in {location} is {temperature} and {conditions}.',
+    message: 'Current weather in {{location}} is {{temperature}} and {{conditions}}.',
     icon: true
   };
 
@@ -32,16 +32,16 @@ function getWeather(options) {
   }
 
   // Render message to DOM
-  function renderMessage(message, weather) {
+  function renderMessage(weather) {
     var location = `${sanitizeHTML(weather.city_name)}, ${sanitizeHTML(weather.state_code)}`;
     var temperature = getTemp(sanitizeHTML(weather.temp));
-    var conditions = `${sanitizeHTML(weather.weather.description).toLowerCase()}`;
+    var conditions = sanitizeHTML(weather.weather.description).toLowerCase();
 
     app.innerHTML = `
-      <p>${message
-        .replace('{location}', location)
-        .replace('{temperature}', temperature)
-        .replace('{conditions}', conditions)
+      <p>${settings.message
+        .replace('{{location}}', location)
+        .replace('{{temperature}}', temperature)
+        .replace('{{conditions}}', conditions)
       }</p>
     `;  
   }
@@ -59,7 +59,7 @@ function getWeather(options) {
 
   // Render current weather to DOM
   function renderWeather(weather) {
-    renderMessage(settings.message, weather);
+    renderMessage(weather);
     renderIcon(settings.icon, weather);
   }  
 
@@ -90,6 +90,6 @@ function getWeather(options) {
 getWeather({
   apiKey: '418c15fc4a2b4812936ccb24faa2532d',
   // units: 'c',
-//   message: 'It\'s currently {temperature} and {conditions} in {location}.',
+  // message: 'It\'s currently {{temperature}} and {{conditions}} in {{location}}.',
 //   icon: false
 });
