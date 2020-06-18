@@ -13,6 +13,11 @@ var sidkik = (function() {
     return document.querySelector(selector);
   };
 
+  // Get all matching elements in the DOM as an array
+  methods.getAll = function(selector) {
+    return this.convertToArray(document.querySelectorAll(selector));
+  };
+
   // Return public methods
   return methods;
 
