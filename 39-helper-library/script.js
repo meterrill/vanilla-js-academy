@@ -19,9 +19,16 @@ var sidkik = (function() {
   };
 
   // Add a class to all elements in an array
-  methods.addClass = function(array, newClass) {
+  methods.addClass = function(array, className) {
     array.forEach(function(element) {
-      element.classList.add(newClass);
+      element.classList.add(className);
+    });
+  };
+
+  // Remove a class from all elements in an array
+  methods.removeClass = function(array, className) {
+    array.forEach(function(element) {
+      element.classList.remove(className);
     });
   };
 
