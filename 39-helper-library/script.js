@@ -18,6 +18,13 @@ var sidkik = (function() {
     return this.convertToArray(document.querySelectorAll(selector));
   };
 
+  // Add a class to all elements in an array
+  methods.addClass = function(array, newClass) {
+    array.forEach(function(element) {
+      element.classList.add(newClass);
+    });
+  };
+
   // Return public methods
   return methods;
 
