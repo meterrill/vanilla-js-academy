@@ -56,3 +56,21 @@ var _ = (function() {
   return methods;
 
 })();
+
+// _.toArray()
+var arr = _.toArray(document.querySelectorAll('button'));
+console.log('_.toArray()', arr);
+
+// _.getFirst()
+var btn = _.getFirst('button');
+console.log('_.getFirst()', btn);
+
+// _.getAll()
+var btns = _.getAll('button');
+console.log('_.getAll()', btns);
+
+// _.addClass()
+_.addClass(btns, 'btn-purple');
+
+// _.removeClass()
+_.removeClass(btns, 'btn-blue');
