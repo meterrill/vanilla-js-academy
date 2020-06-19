@@ -1,11 +1,11 @@
-var sidkik = (function() {
+var _ = (function() {
 
   // Public methods
   var methods = {};
 
   // Convert a NodeList to an Array
-  methods.convertToArray = function(nodeList) {
-    return Array.prototype.slice.call(nodeList);
+  methods.toArray = function(list) {
+    return Array.prototype.slice.call(list);
   };
 
   // Get the first matching element in the DOM
@@ -15,7 +15,7 @@ var sidkik = (function() {
 
   // Get all matching elements in the DOM as an array
   methods.getAll = function(selector) {
-    return this.convertToArray(document.querySelectorAll(selector));
+    return this.toArray(document.querySelectorAll(selector));
   };
 
   // Add a class to all elements in an array
