@@ -17,6 +17,14 @@ var $ = (function() {
   };
 
   /**
+   * Get the first matching element
+   * @return  {Object}  An element
+   */
+  Constructor.prototype.getFirst = function() {
+    return this.elements[0];
+  }
+
+  /**
    * Return the contructor object
    */
   return Constructor;
