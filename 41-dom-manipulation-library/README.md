@@ -1,6 +1,6 @@
 # DOM Manipulation Library
 
-CCreate a DOM manipulation library with public methods you can use to:
+Create a DOM manipulation library with public methods you can use to:
 - Get an array of items from the DOM.
 - Get the first and last matching items from the DOM.
 - Add and remove a class to all matching elements.
