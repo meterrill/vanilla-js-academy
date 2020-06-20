@@ -12,7 +12,7 @@ var $ = (function() {
    * Get an array of elements
    * @return  {Array} An array
    */
-  Constructor.prototype.getArray = function() {
+  Constructor.prototype.toArray = function() {
     return Array.prototype.slice.call(this.elements);
   };
 
@@ -37,8 +37,18 @@ var $ = (function() {
    * @param  {String}  className The class to add
    */
   Constructor.prototype.addClass = function(className) {
-    this.getArray().forEach(function(element) {
+    this.toArray().forEach(function(element) {
       element.classList.add(className);
+    });
+  }
+
+  /**
+   * Remove a class from all matching elements
+   * @param  {String}  className The class to remove
+   */
+  Constructor.prototype.removeClass = function(className) {
+    this.toArray().forEach(function(element) {
+      element.classList.remove(className);
     });
   }
 
