@@ -33,6 +33,16 @@ var $ = (function() {
   }
 
   /**
+   * Add a class to all matching elements
+   * @param  {String}  className The class to add
+   */
+  Constructor.prototype.addClass = function(className) {
+    this.getArray().forEach(function(element) {
+      element.classList.add(className);
+    });
+  }
+
+  /**
    * Return the contructor object
    */
   return Constructor;
