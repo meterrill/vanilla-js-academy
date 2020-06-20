@@ -25,6 +25,14 @@ var $ = (function() {
   }
 
   /**
+   * Get the last matching element
+   * @return  {Object}  An element
+   */
+  Constructor.prototype.getLast = function() {
+    return this.elements[this.elements.length - 1];
+  }
+
+  /**
    * Return the contructor object
    */
   return Constructor;
