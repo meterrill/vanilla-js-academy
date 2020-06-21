@@ -58,3 +58,23 @@ var $ = (function() {
   return Constructor;
 
 })();
+
+// Create new instances
+var btns = new $('button');
+var list = new $('ul');
+
+// $.toArray()
+console.log('$.toArray()', btns.toArray());
+console.log('$.toArray()', list.toArray());
+
+// $.getFirst()
+console.log('$.getFirst()', btns.getFirst());
+
+// $.getLast()
+console.log('$.getLast()', btns.getLast());
+
+// $.addClass()
+btns.addClass('btn-purple');
+
+// $.removeClass()
+btns.removeClass('btn-blue');
