@@ -60,3 +60,9 @@ var $ = (function() {
   return Constructor;
 
 })();
+
+// Create new instance
+var btns = new $('button');
+
+// Chain $.addClass() and $.removeClass()
+btns.addClass('btn-purple').removeClass('btn-blue');
