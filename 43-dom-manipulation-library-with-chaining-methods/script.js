@@ -40,6 +40,7 @@ var $ = (function() {
     this.toArray().forEach(function(element) {
       element.classList.add(className);
     });
+    return this;
   }
 
   /**
@@ -50,6 +51,7 @@ var $ = (function() {
     this.toArray().forEach(function(element) {
       element.classList.remove(className);
     });
+    return this;
   }
 
   /**
