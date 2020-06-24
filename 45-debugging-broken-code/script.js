@@ -135,7 +135,8 @@ var clickHandler = function (event) {
 
   // If the door reveals a sock, render the lost UI
   // Then, end the callback function
-  if (monsters[id] = 'socks') {
+  // @bug {single = instead of a comparison operator} if (monsters[id] = 'socks') {
+  if (monsters[id] === 'socks') {
     renderLost();
     return;
   }
