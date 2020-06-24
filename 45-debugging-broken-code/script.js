@@ -22,7 +22,8 @@ var monsters = [
 var app = document.querySelector('#app');
 
 // The number of monsters who have been found
-var count;
+// @bug #5 {declared wrong variable name} var count;
+var found;
 
 
 //
