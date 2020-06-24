@@ -118,7 +118,8 @@ var renderWon = function () {
 var clickHandler = function (event) {
 
   // If a "play again" button was clicked, reset the UI and end the callback function
-  if (event.target.hasAttribute('[data-monster-play-again]')) {
+  // @bug #4 {unnecessary brackets} if (event.target.hasAttribute('[data-monster-play-again]')) {
+  if (event.target.hasAttribute('data-monster-play-again')) {
     renderMonsters();
     return;
   }
