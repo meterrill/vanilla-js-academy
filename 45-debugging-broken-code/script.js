@@ -126,7 +126,8 @@ var clickHandler = function (event) {
   // Check if clicked element or it's parent has a [data-monster-id] attribute
   // If not, it's not a monster
   // return and stop running our callback function
-  var monster = event.target.closest('data-monster-id');
+  // @bug {missing brackets} var monster = event.target.closest('data-monster-id');
+  var monster = event.target.closest('[data-monster-id]');
   if (!monster) return;
 
   // Get the monster's index in the array
