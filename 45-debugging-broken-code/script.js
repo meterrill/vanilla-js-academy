@@ -126,7 +126,7 @@ var clickHandler = function (event) {
   // Check if clicked element or it's parent has a [data-monster-id] attribute
   // If not, it's not a monster
   // return and stop running our callback function
-  // @bug {missing brackets} var monster = event.target.closest('data-monster-id');
+  // @bug #1 {missing brackets} var monster = event.target.closest('data-monster-id');
   var monster = event.target.closest('[data-monster-id]');
   if (!monster) return;
 
@@ -135,8 +135,9 @@ var clickHandler = function (event) {
 
   // If the door reveals a sock, render the lost UI
   // Then, end the callback function
-  // @bug {single = instead of a comparison operator} if (monsters[id] = 'socks') {
-  if (monsters[id] === 'socks') {
+  // @bug #2 {single = instead of a comparison operator} if (monsters[id] = 'socks') {
+  // @bug #3 {typo} if (monsters[id] === 'socks') {
+  if (monsters[id] === 'sock') {
     renderLost();
     return;
   }
