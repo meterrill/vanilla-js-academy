@@ -22,7 +22,8 @@ var monsters = [
 var app = document.querySelector('#app');
 
 // The number of monsters who have been found
-// @bug #5 {declared wrong variable name} var count;
+// @bug #5 {variable declared with wrong name} 
+// var count;
 var found;
 
 
@@ -119,7 +120,8 @@ var renderWon = function () {
 var clickHandler = function (event) {
 
   // If a "play again" button was clicked, reset the UI and end the callback function
-  // @bug #4 {unnecessary brackets} if (event.target.hasAttribute('[data-monster-play-again]')) {
+  // @bug #4 {unnecessary brackets} 
+  // if (event.target.hasAttribute('[data-monster-play-again]')) {
   if (event.target.hasAttribute('data-monster-play-again')) {
     renderMonsters();
     return;
@@ -128,7 +130,8 @@ var clickHandler = function (event) {
   // Check if clicked element or it's parent has a [data-monster-id] attribute
   // If not, it's not a monster
   // return and stop running our callback function
-  // @bug #1 {missing brackets} var monster = event.target.closest('data-monster-id');
+  // @bug #1 {missing brackets} 
+  // var monster = event.target.closest('data-monster-id');
   var monster = event.target.closest('[data-monster-id]');
   if (!monster) return;
 
@@ -137,8 +140,9 @@ var clickHandler = function (event) {
 
   // If the door reveals a sock, render the lost UI
   // Then, end the callback function
-  // @bug #2 {single = instead of a comparison operator} if (monsters[id] = 'socks') {
-  // @bug #3 {typo} if (monsters[id] === 'socks') {
+  // @bug #2 {assignment operator used instead of a comparison operator} 
+  // @bug #3 {typo} 
+  // if (monsters[id] = 'socks') {
   if (monsters[id] === 'sock') {
     renderLost();
     return;
