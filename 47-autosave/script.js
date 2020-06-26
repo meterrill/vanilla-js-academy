@@ -2,15 +2,17 @@
 
   'use strict';
 
-  // Get #save-me form
+  // Get #save-me form and form fields
   var form = document.querySelector('#save-me');
-  var name = document.querySelector('#name');
+  var formFields = Array.prototype.slice.call(document.querySelectorAll('input, textarea'));
 
   /**
    * Get the input values from local storage
    */
   function getValue() {
-    name.value = localStorage.getItem('name');
+    formFields.forEach(function(field) {
+      field.value = localStorage.getItem(field.id);
+    });
   }
 
   /**
