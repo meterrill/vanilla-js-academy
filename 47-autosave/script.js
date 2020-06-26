@@ -24,13 +24,16 @@
   }
 
   /**
-   * Remove items from local storage
+   * Remove input values from local storage
    * @param {*} event 
    */
   function removeValue(event) {
     event.preventDefault();
 
-    localStorage.removeItem('name');
+    formFields.forEach(function(field) {
+      localStorage.removeItem(field.id);
+      field.value = '';
+    });
   }
 
   // Get the input values when the page loads
