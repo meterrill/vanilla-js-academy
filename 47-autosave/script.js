@@ -5,14 +5,17 @@
   // Get #save-me form
   var form = document.querySelector('#save-me');
 
-  // Log the updated value
-  function updateValue(event) {
+  /**
+   * Save the input value to local storage
+   * @param {*} event 
+   */
+  function setValue(event) {
     if (event.target.matches('#name')) {
-      console.log(event.target.value);
+      localStorage.setItem('name', event.target.value);
     }
   }
 
   // Listen for changes to form inputs
-  form.addEventListener('input', updateValue);
+  form.addEventListener('input', setValue);
 
 })();
