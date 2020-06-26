@@ -23,10 +23,23 @@
     }
   }
 
+  /**
+   * Remove items from local storage
+   * @param {*} event 
+   */
+  function removeValue(event) {
+    event.preventDefault();
+
+    localStorage.removeItem('name');
+  }
+
   // Get the input values when the page loads
   getValue();
 
   // Listen for changes to form inputs
   form.addEventListener('input', setValue);
+
+  // Listen for form submit
+  form.addEventListener('submit', removeValue);
 
 })();
