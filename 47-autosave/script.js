@@ -18,9 +18,7 @@
    * @param {*} event 
    */
   function setValue(event) {
-    if (event.target.matches('#name')) {
-      localStorage.setItem('name', event.target.value);
-    }
+    localStorage.setItem(event.target.id, event.target.value);
   }
 
   /**
