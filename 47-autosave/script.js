@@ -2,6 +2,8 @@
 
   'use strict';
 
+  var storagePrefix = 'form-autosave_';
+
   // Get #save-me form and form fields
   var form = document.querySelector('#save-me');
   var formFields = Array.prototype.slice.call(document.querySelectorAll('input, textarea'));
@@ -11,7 +13,7 @@
    */
   function getValue() {
     formFields.forEach(function(field) {
-      field.value = localStorage.getItem(field.id);
+      field.value = localStorage.getItem(storagePrefix + field.id);
     });
   }
 
@@ -20,7 +22,7 @@
    * @param {*} event 
    */
   function setValue(event) {
-    localStorage.setItem(event.target.id, event.target.value);
+    localStorage.setItem(storagePrefix + event.target.id, event.target.value);
   }
 
   /**
@@ -31,7 +33,7 @@
     event.preventDefault();
 
     formFields.forEach(function(field) {
-      localStorage.removeItem(field.id);
+      localStorage.removeItem(storagePrefix + field.id);
       field.value = '';
     });
   }
