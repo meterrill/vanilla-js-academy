@@ -9,11 +9,33 @@
   var formFields = Array.prototype.slice.call(document.querySelectorAll('input, textarea'));
 
   /**
+   * Get an ID for a field
+   * @param  {Node}   field The field
+   * @return {String}       The ID
+   */
+  function getID(field) {
+    if (field.id.length > 0) {
+      return field.id;
+    }
+
+    if (field.name.length > 0) {
+      return field.name;
+    }
+
+    return null;
+  }
+
+  /**
    * Get the input values from local storage
    */
   function getValue() {
     formFields.forEach(function(field) {
-      field.value = localStorage.getItem(storagePrefix + field.id);
+      // Get an ID for the field
+      var id = getID(field);
+      if (!id) return;
+
+      // Get the value from localStorage
+      field.value = localStorage.getItem(storagePrefix + id);
     });
   }
 
@@ -25,18 +47,30 @@
     // Only run if event.target is inside the #save-me form
     if (!event.target.closest('#save-me')) return;
 
-    localStorage.setItem(storagePrefix + event.target.id, event.target.value);
+    // Get an ID for the field
+    var id = getID(event.target);
+    if (!id) return;
+
+    // Save the field to localStorage
+    localStorage.setItem(storagePrefix + id, event.target.value);
   }
 
   /**
    * Remove input values from local storage
-   * @param {*} event 
+   * @param {Event} event The event object
    */
   function removeValue(event) {
     event.preventDefault();
 
     formFields.forEach(function(field) {
-      localStorage.removeItem(storagePrefix + field.id);
+      // Get an ID for the field
+      var id = getID(field);
+      if (!id) return;
+
+      // Remove the field from localStorage
+      localStorage.removeItem(storagePrefix + id);
+
+      // Reset the field value
       field.value = '';
     });
   }
