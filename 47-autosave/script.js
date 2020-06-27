@@ -19,9 +19,12 @@
 
   /**
    * Save the input value to local storage
-   * @param {*} event 
+   * @param {Object} event The event object
    */
   function setValue(event) {
+    // Only run if event.target is inside the #save-me form
+    if (!event.target.closest('#save-me')) return;
+
     localStorage.setItem(storagePrefix + event.target.id, event.target.value);
   }
 
