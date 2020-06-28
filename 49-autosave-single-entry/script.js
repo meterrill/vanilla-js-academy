@@ -3,6 +3,7 @@
   'use strict';
 
   var storagePrefix = 'form-autosave_';
+  var formValues = {};
 
   // Get #save-me form and form fields
   var form = document.querySelector('#save-me');
@@ -51,8 +52,11 @@
     var id = getID(event.target);
     if (!id) return;
 
-    // Save the field to localStorage
-    localStorage.setItem(storagePrefix + id, event.target.value);
+    // Add field to formValues object
+    formValues[id] = event.target.value;
+
+    // Save the formValues object to localStorage
+    localStorage.setItem('formValues', JSON.stringify(formValues));
   }
 
   /**
