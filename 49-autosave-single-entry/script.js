@@ -83,6 +83,9 @@
       field.value = '';
     });
 
+    // Reset the formValues object
+    formValues = {};
+
     // Remove the formValues object from localStorage
     localStorage.removeItem('formValues');
   }
