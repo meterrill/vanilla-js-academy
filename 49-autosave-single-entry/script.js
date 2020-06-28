@@ -30,13 +30,22 @@
    * Get the input values from local storage
    */
   function getValue() {
+    // Only run if formValues exists in localStorage
+    if (!localStorage.getItem('formValues')) return;
+
+    // Get the formValues object from localStorage
+    formValues = JSON.parse(localStorage.getItem('formValues'));
+
     formFields.forEach(function(field) {
       // Get an ID for the field
       var id = getID(field);
       if (!id) return;
 
-      // Get the value from localStorage
-      field.value = localStorage.getItem(storagePrefix + id);
+      // Only run if id exists in the formValues object
+      if (!formValues[id]) return;
+
+      // Get the value from the formValues object
+      field.value = formValues[id];
     });
   }
 
