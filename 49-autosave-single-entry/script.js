@@ -2,7 +2,6 @@
 
   'use strict';
 
-  var storagePrefix = 'form-autosave_';
   var formValues = {};
 
   // Get #save-me form and form fields
@@ -80,12 +79,12 @@
       var id = getID(field);
       if (!id) return;
 
-      // Remove the field from localStorage
-      localStorage.removeItem(storagePrefix + id);
-
       // Reset the field value
       field.value = '';
     });
+
+    // Remove the formValues object from localStorage
+    localStorage.removeItem('formValues');
   }
 
   // Get the input values when the page loads
