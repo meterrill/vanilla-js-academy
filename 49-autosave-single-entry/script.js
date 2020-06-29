@@ -5,9 +5,6 @@
   // Save the localStorage key
   var storageID = 'form-autosave';
 
-  // Declare a variable for form values
-  var formValues = {};
-
   // Get the #save-me form
   var form = document.querySelector('#save-me');
   
@@ -35,11 +32,10 @@
    * Get the input values from local storage
    */
   function getValue() {
-    // Only run if formValues exists in localStorage
-    if (!localStorage.getItem(storageID)) return;
-
     // Get the formValues object from localStorage
-    formValues = JSON.parse(localStorage.getItem(storageID));
+    var formValues = localStorage.getItem(storageID);
+    if (!formValues) return;
+    formValues = JSON.parse(formValues);
 
     formFields.forEach(function(field) {
       // Get an ID for the field
@@ -66,6 +62,10 @@
     var id = getID(event.target);
     if (!id) return;
 
+    // Get the formValues object from localStorage
+    var formValues = localStorage.getItem(storageID);
+    formValues = formValues ? JSON.parse(formValues) : {};
+
     // Add field to formValues object
     formValues[id] = event.target.value;
 
@@ -88,9 +88,6 @@
       // Reset the field value
       field.value = '';
     });
-
-    // Reset the formValues object
-    formValues = {};
 
     // Remove the formValues object from localStorage
     localStorage.removeItem(storageID);
