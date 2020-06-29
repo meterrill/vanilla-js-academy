@@ -2,10 +2,16 @@
 
   'use strict';
 
+  // Save the localStorage key
+  var storageID = 'form-autosave';
+
+  // Declare a variable for form values
   var formValues = {};
 
-  // Get #save-me form and form fields
+  // Get the #save-me form
   var form = document.querySelector('#save-me');
+  
+  // Get the form fields
   var formFields = Array.prototype.slice.call(document.querySelectorAll('input, textarea'));
 
   /**
@@ -30,10 +36,10 @@
    */
   function getValue() {
     // Only run if formValues exists in localStorage
-    if (!localStorage.getItem('formValues')) return;
+    if (!localStorage.getItem(storageID)) return;
 
     // Get the formValues object from localStorage
-    formValues = JSON.parse(localStorage.getItem('formValues'));
+    formValues = JSON.parse(localStorage.getItem(storageID));
 
     formFields.forEach(function(field) {
       // Get an ID for the field
@@ -64,7 +70,7 @@
     formValues[id] = event.target.value;
 
     // Save the formValues object to localStorage
-    localStorage.setItem('formValues', JSON.stringify(formValues));
+    localStorage.setItem(storageID, JSON.stringify(formValues));
   }
 
   /**
@@ -87,7 +93,7 @@
     formValues = {};
 
     // Remove the formValues object from localStorage
-    localStorage.removeItem('formValues');
+    localStorage.removeItem(storageID);
   }
 
   // Get the input values when the page loads
