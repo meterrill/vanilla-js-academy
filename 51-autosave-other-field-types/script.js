@@ -100,16 +100,12 @@
       if (!id) return;
 
       // Reset the field value
-      if (field.type === 'radio') {
-        var radioButtons = form.querySelectorAll(`input[name="${id}"]`);
-        for (const radioButton of radioButtons) {
-          radioButton.checked = false;
-        }
-      } else if (field.type === 'checkbox') {
+      if (field.type === 'radio' || field.type === 'checkbox') {
         field.checked = false;
-      } else {
-        field.value = '';
+        return;
       }
+      
+      field.value = '';
     });
 
     // Remove the formValues object from localStorage
