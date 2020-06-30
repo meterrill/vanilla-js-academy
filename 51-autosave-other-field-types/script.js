@@ -46,7 +46,18 @@
       if (!formValues[id]) return;
 
       // Get the value from the formValues object
-      field.value = formValues[id];
+      if (field.type === 'radio') {
+        if (field.value === formValues[id]) {
+          field.checked = true;
+        }
+      } else if (field.type === 'checkbox') {
+        var checkbox = form.querySelector(`input[name="${id}"]`);
+        if (formValues[id] === true) {
+          checkbox.checked = true;
+        }
+      } else {
+        field.value = formValues[id];
+      }
     });
   }
 
