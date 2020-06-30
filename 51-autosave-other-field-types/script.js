@@ -67,7 +67,18 @@
     formValues = formValues ? JSON.parse(formValues) : {};
 
     // Add field to formValues object
-    formValues[id] = event.target.value;
+    if (event.target.type === 'radio') {
+      var radioButtons = form.querySelectorAll(`input[name="${id}"]`);
+      for (const radioButton of radioButtons) {
+        if (radioButton.checked) {
+          formValues[id] = radioButton.value;
+        }
+      }
+    } else if (event.target.type === 'checkbox') {
+      formValues[id] = event.target.checked;
+    } else {
+      formValues[id] = event.target.value;
+    }
 
     // Save the formValues object to localStorage
     localStorage.setItem(storageID, JSON.stringify(formValues));
