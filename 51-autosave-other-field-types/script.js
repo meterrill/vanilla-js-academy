@@ -9,7 +9,7 @@
   var form = document.querySelector('#save-me');
   
   // Get the form fields
-  var formFields = Array.prototype.slice.call(document.querySelectorAll('input, textarea'));
+  var formFields = Array.prototype.slice.call(document.querySelectorAll('input, textarea, select'));
 
   /**
    * Get an ID for a field
