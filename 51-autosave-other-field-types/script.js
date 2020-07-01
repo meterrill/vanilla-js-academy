@@ -94,19 +94,7 @@
   function removeValue(event) {
     event.preventDefault();
 
-    formFields.forEach(function(field) {
-      // Get an ID for the field
-      var id = getID(field);
-      if (!id) return;
-
-      // Reset the field value
-      if (field.type === 'radio' || field.type === 'checkbox') {
-        field.checked = false;
-        return;
-      }
-      
-      field.value = '';
-    });
+    form.reset();
 
     // Remove the formValues object from localStorage
     localStorage.removeItem(storageID);
