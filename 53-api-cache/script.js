@@ -46,7 +46,7 @@
 
   /**
    * Display the data in the DOM
-   * @param {Object} data 
+   * @param {Object} data The data from the API or Storage
    */
   function displayData(data) {
     app.innerHTML = data.articles.map(function(article) {
@@ -68,9 +68,6 @@
       console.log('Data from API');
       displayData(data);
 
-      // Return the response data
-      return data;
-    }).then(function(data) {
       // Set up the localStorage data
       var data = {
         data: data,
