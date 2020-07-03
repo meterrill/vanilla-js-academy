@@ -12,6 +12,24 @@
   var endpoint = 'https://vanillajsacademy.com/api/pirates.json';
 
   /**
+   * Check if saved data is still valid
+   * @param   {Object}  saved   Saved data
+   * @param   {Number}  goodFor Amount of time in milliseconds that the data is good for
+   * @return  {Boolean}         If true, data is still valid
+   */
+  var isDataValid = function (saved, goodFor) {
+
+    // Check that there's data, and a timestamp key
+    if (!saved || !saved.data || !saved.timestamp) return false;
+  
+    // Get the difference between the timestamp and current time
+    var difference = new Date().getTime() - saved.timestamp;
+  
+    return difference < goodFor;
+  
+  };
+
+  /**
    * Display the data in the DOM
    * @param {Object} data 
    */
@@ -33,7 +51,7 @@
     }).then(function(data) {
       // Display the response data
       displayData(data);
-      
+
       // Return the response data
       return data;
     }).then(function(data) {
@@ -52,6 +70,18 @@
 
   if (!saved) {
     getDataFromAPI();
-  }  
+  } else {
+    saved = JSON.parse(saved);
+    // Check if it's been less than 5 seconds since the data was saved
+    if (isDataValid(saved, 1000 * 5)) {
+      // The data is still good, use it
+      console.log('Data from Storage');
+      displayData(saved.data);
+    } else {
+      // Get fresh data and use that instead
+      console.log('Data from API');
+      getDataFromAPI();
+    }
+  }
 
 })();
