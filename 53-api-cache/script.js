@@ -12,13 +12,27 @@
   var endpoint = 'https://vanillajsacademy.com/api/pirates.json';
 
   /**
+   * Display the data in the DOM
+   * @param {Object} data 
+   */
+  function displayData(data) {
+    app.innerHTML = data.articles.map(function(article) {
+      return `<article>
+        <h2>${article.title}</h2>
+        <p>${article.article}</p>
+      </article>`
+    }).join('');
+  }
+
+  /**
    * Get the data from the API
    */
   function getDataFromAPI() {
     fetch(endpoint).then(function(response) {
       return response.ok ? response.json() : Promise.reject(response);
     }).then(function(data) {
-      console.log(data);
+      // Display the response data
+      displayData(data);
     }).catch(function(error) {
       app.innerHTML = '<p>We\'re experiencing some technical difficulties. Please try again later.</p>';
     });
