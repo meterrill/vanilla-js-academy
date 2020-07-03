@@ -50,6 +50,7 @@
       return response.ok ? response.json() : Promise.reject(response);
     }).then(function(data) {
       // Display the response data
+      console.log('Data from API');
       displayData(data);
 
       // Return the response data
@@ -68,9 +69,8 @@
     });
   }
 
-  if (!saved) {
-    getDataFromAPI();
-  } else {
+  if (saved) {
+    // Parse saved data
     saved = JSON.parse(saved);
     // Check if it's been less than 5 seconds since the data was saved
     if (isDataValid(saved, 1000 * 5)) {
@@ -79,9 +79,10 @@
       displayData(saved.data);
     } else {
       // Get fresh data and use that instead
-      console.log('Data from API');
       getDataFromAPI();
     }
+  } else {
+    getDataFromAPI();
   }
 
 })();
