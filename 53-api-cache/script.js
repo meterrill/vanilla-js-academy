@@ -33,6 +33,18 @@
     }).then(function(data) {
       // Display the response data
       displayData(data);
+      
+      // Return the response data
+      return data;
+    }).then(function(data) {
+      // Set up the localStorage data
+      var data = {
+        data: data,
+        timestamp: new Date().getTime()
+      };
+  
+      // Save the data to localStorage
+      localStorage.setItem('scuttlebuttData', JSON.stringify(data));
     }).catch(function(error) {
       app.innerHTML = '<p>We\'re experiencing some technical difficulties. Please try again later.</p>';
     });
