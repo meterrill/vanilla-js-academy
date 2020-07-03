@@ -4,12 +4,15 @@
 
   // Get the #app element
   var app = document.querySelector('#app');
-
-  // Get saved data from localStorage
-  var saved = localStorage.getItem('scuttlebuttData');
-
+  
   // Store the endpoint
   var endpoint = 'https://vanillajsacademy.com/api/pirates.json';
+
+  // Save the localStorage key
+  var storageID = 'scuttlebuttData';
+
+  // Get saved data from localStorage
+  var saved = localStorage.getItem(storageID);
 
   /**
    * Check if saved data is still valid
@@ -75,7 +78,7 @@
       };
   
       // Save the data to localStorage
-      localStorage.setItem('scuttlebuttData', JSON.stringify(data));
+      localStorage.setItem(storageID, JSON.stringify(data));
     }).catch(function(error) {
       app.innerHTML = '<p>We\'re experiencing some technical difficulties. Please try again later.</p>';
     });
