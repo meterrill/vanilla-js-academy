@@ -5,9 +5,6 @@
   // Get the #app element
   var app = document.querySelector('#app');
   
-  // Store the endpoint
-  var endpoint = 'https://vanillajsacademy.com/api/pirates.json';
-
   // Save the localStorage key
   var storageID = 'scuttlebuttData';
 
@@ -58,10 +55,21 @@
   }
 
   /**
+   * Dynamically vary the API endpoint
+   * @return {String} The API endpoint
+   */
+  var getEndpoint = function () {
+    var endpoint = 'https://vanillajsacademy.com/api/';
+    var random = Math.random();
+    if (random < 0.5) return endpoint + 'pirates.json';
+    return endpoint + 'fail.json';
+  };
+  
+  /**
    * Get the data from the API
    */
   function getDataFromAPI() {
-    fetch(endpoint).then(function(response) {
+    fetch(getEndpoint()).then(function(response) {
       return response.ok ? response.json() : Promise.reject(response);
     }).then(function(data) {
       // Display the response data
