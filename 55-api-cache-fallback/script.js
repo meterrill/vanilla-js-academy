@@ -12,24 +12,6 @@
   var saved = localStorage.getItem(storageID);
 
   /**
-   * Check if saved data is still valid
-   * @param   {Object}  saved   Saved data
-   * @param   {Number}  goodFor Amount of time in milliseconds that the data is good for
-   * @return  {Boolean}         If true, data is still valid
-   */
-  var isDataValid = function (saved, goodFor) {
-
-    // Check that there's data, and a timestamp key
-    if (!saved || !saved.data || !saved.timestamp) return false;
-  
-    // Get the difference between the timestamp and current time
-    var difference = new Date().getTime() - saved.timestamp;
-  
-    return difference < goodFor;
-  
-  };
-
-  /**
    * Sanitize and encode all HTML in a user-submitted string
    * (c) 2018 Chris Ferdinandi, MIT License, https://gomakethings.com
    * @param  {String} str  The user-submitted string
@@ -85,9 +67,34 @@
       // Save the data to localStorage
       localStorage.setItem(storageID, JSON.stringify(data));
     }).catch(function(error) {
-      app.innerHTML = '<p>We\'re experiencing some technical difficulties. Please try again later.</p>';
+      if (saved) {
+        // Display expired data from storage
+        console.log('Expired data from Storage');
+        displayData(saved.data);
+      } else {
+        // Display error message
+        app.innerHTML = '<p>We\'re experiencing some technical difficulties. Please try again later.</p>';
+      }
     });
   }
+
+  /**
+   * Check if saved data is still valid
+   * @param   {Object}  saved   Saved data
+   * @param   {Number}  goodFor Amount of time in milliseconds that the data is good for
+   * @return  {Boolean}         If true, data is still valid
+   */
+  var isDataValid = function (saved, goodFor) {
+
+    // Check that there's data, and a timestamp key
+    if (!saved || !saved.data || !saved.timestamp) return false;
+  
+    // Get the difference between the timestamp and current time
+    var difference = new Date().getTime() - saved.timestamp;
+  
+    return difference < goodFor;
+  
+  };
 
   if (saved) {
     // Parse saved data
@@ -95,7 +102,7 @@
     // Check if it's been less than 5 seconds since the data was saved
     if (isDataValid(saved, 1000 * 5)) {
       // The data is still good, use it
-      console.log('Data from Storage');
+      console.log('Valid data from Storage');
       displayData(saved.data);
     } else {
       // Get fresh data and use that instead
