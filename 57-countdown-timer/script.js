@@ -18,12 +18,24 @@ Timer.prototype.render = function() {
 
 // Instantiate a new Timer component
 var app = new Timer('#app', {
-  data: 60,
+  data: {count: 60},
   template: function(props) {
-    var html = `<h2>${props}</h2>`;
-    return html;
+    return `<h2>${props.count}</h2>`;
   }
 });
 
-// Render the Timer
-app.render();
+// Run the render function and decrement every second
+var countDown = setInterval(function() {
+
+  // Render the Timer
+  app.render();
+  
+  // Decrement the count by 1
+  app.data.count--;
+  
+  // Clear the interval when count equals 0
+  if (app.data.count < 0) {
+    clearInterval(countDown);
+  }
+  
+}, 1000);
