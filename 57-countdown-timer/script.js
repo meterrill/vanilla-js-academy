@@ -9,11 +9,21 @@ function Timer(selector, options) {
   this.template = options.template;
 };
 
+/**
+ * Render a new UI
+ */
+Timer.prototype.render = function() {
+  this.element.innerHTML = this.template(this.data);
+}
+
 // Instantiate a new Timer component
 var app = new Timer('#app', {
   data: 60,
   template: function(props) {
-    var html = `<h2>${props.count}</h2>`;
+    var html = `<h2>${props}</h2>`;
     return html;
   }
 });
+
+// Render the Timer
+app.render();
