@@ -1,3 +1,5 @@
+var duration = 10;
+
 /**
  * State-based UI Component
  * @param {String} selector The selector for the target element
@@ -16,15 +18,24 @@ Timer.prototype.render = function() {
   this.element.innerHTML = this.template(this.data);
 }
 
-function startTimer() {
-  // Instantiate a new Timer component
-  var app = new Timer('#app', {
-    data: {count: 60},
-    template: function(props) {
-      return `<p>${props.count}</p>`;
+/**
+ * Instantiate a new Timer component
+ * @param {Object}  props The component options
+ */
+var app = new Timer('#app', {
+  data: {time: duration},
+  template: function(props) {
+    // Display a restart button when time equals 0
+    if (props.time < 1) {
+      return `<p><button data-restart>Restart</button></p>`;
     }
-  });
-  
+
+    // Display the current time
+    return `<p>${props.time}</p>`;
+  }
+});
+
+function startTimer() {
   // Run the render function and decrement every second
   var countDown = setInterval(function() {
   
@@ -37,10 +48,6 @@ function startTimer() {
     // Clear the interval when count equals 0
     if (app.data.count < -1) {
       clearInterval(countDown);
-  
-      // Display a restart button
-      app.data.count = `<button data-restart>Restart</button`;
-      app.render();
     }
     
   }, 1000);
