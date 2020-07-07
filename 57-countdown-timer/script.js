@@ -21,7 +21,7 @@ function startTimer() {
   var app = new Timer('#app', {
     data: {count: 60},
     template: function(props) {
-      return `<h2>${props.count}</h2>`;
+      return `<p>${props.count}</p>`;
     }
   });
   
