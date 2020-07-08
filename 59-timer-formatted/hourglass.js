@@ -15,6 +15,3 @@ var animateHourglass = function() {
 
 // Run the animation
 animateHourglass();
-
-// Run the animation every 3 seconds
-var hourglass = setInterval(animateHourglass, 3000);
