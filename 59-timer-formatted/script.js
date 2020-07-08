@@ -1,4 +1,4 @@
-var duration = 60;
+var duration = 120;
 
 /**
  * State-based UI Component
@@ -19,6 +19,17 @@ Timer.prototype.render = function() {
 }
 
 /**
+ * Format the time
+ * @param   {Number} number The time in seconds
+ * @returns {String} string The time in M:SS format
+ */
+function formatTime(number) {
+  var minutes = Math.floor(number / 60);
+  var seconds = number % 60;
+  return `${minutes.toString()}:${seconds.toString().padStart(2, '0')}`;
+}
+
+/**
  * Instantiate a new Timer component
  * @param {Object}  props The component options
  */
@@ -31,7 +42,7 @@ var app = new Timer('#app', {
     }
 
     // Display the current time
-    return `<p>${props.time}</p>`;
+    return `<p class="time">${formatTime(props.time)}</p>`;
   }
 });
 
