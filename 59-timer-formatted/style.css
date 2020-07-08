@@ -21,3 +21,7 @@ p {
   font-feature-settings: 'tnum';
   font-variant-numeric: tabular-nums;
 }
+  
+.fa {
+  font-size: 1.25em;
+}

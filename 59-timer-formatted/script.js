@@ -38,6 +38,8 @@ var app = new Timer('#app', {
   template: function(props) {
     // Display a restart button when time equals 0
     if (props.time < 1) {
+      hourglassIcon.style.display = 'none';
+
       return `<p><button data-restart>Restart</button></p>`;
     }
 
@@ -64,6 +66,8 @@ function startTimer() {
     // Clear the interval when time equals 0
     if (app.data.time < 0) {
       clearInterval(countdown);
+      
+      clearInterval(hourglass);
     }
 
     // Update the UI
@@ -74,6 +78,9 @@ function startTimer() {
 window.addEventListener('click', function() {
   if (event.target.matches('[data-restart]')) {
     startTimer();
+
+    hourglassIcon.style.display = 'block';
+    animateHourglass();
   }
 });
 
