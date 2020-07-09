@@ -11,6 +11,9 @@ var animateHourglass = function() {
   setTimeout(function() {
     hourglassIcon.innerHTML = "&#xf253;";
   }, 2000);
+  setTimeout(function() {
+    hourglassIcon.innerHTML = "&#xf250;";
+  }, 3000);
 }
 
 // Run the animation

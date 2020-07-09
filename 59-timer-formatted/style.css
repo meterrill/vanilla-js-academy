@@ -24,4 +24,11 @@ p {
   
 .fa {
   font-size: 1.25em;
+  animation: rotate 4s infinite;
+  animation-fill-mode: forwards;
+}
+
+@keyframes rotate {
+  75% {transform: rotate(0deg);}
+  100% {transform: rotate(180deg);}
 }

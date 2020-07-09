@@ -59,7 +59,7 @@ function startTimer() {
   app.render();
 
   // Run the animation every 3 seconds
-  var hourglass = setInterval(animateHourglass, 3000);
+  var hourglass = setInterval(animateHourglass, 4000);
 
   // Run the render function and decrement every second
   var countdown = setInterval(function() {
