@@ -1,4 +1,5 @@
 var duration = 10;
+var timer;
 
 /**
  * State-based UI Component
@@ -47,6 +48,27 @@ var app = new Timer('#app', {
 });
 
 /**
+ * Countdown the Timer
+ */
+function countdown() {
+  // Decrement the time by 1
+  app.data.time--;
+
+  // Check if the Timer should be stopped
+  stopTimer();
+  
+  // Update the UI
+  app.render();  
+}
+
+function stopTimer() {
+  // Clear the interval when time equals 0
+  if (app.data.time < 1) {
+    clearInterval(timer);
+  }
+}
+
+/**
  * Start the Timer
  */
 function startTimer() {
@@ -56,19 +78,8 @@ function startTimer() {
   // Render the Timer
   app.render();
 
-  // Run the render function and decrement every second
-  var countdown = setInterval(function() {
-    // Decrement the time by 1
-    app.data.time--;
-  
-    // Clear the interval when time equals 0
-    if (app.data.time < 0) {
-      clearInterval(countdown);
-    }
-
-    // Update the UI
-    app.render();
-  }, 1000);
+  // Start the Timer
+  timer = setInterval(countdown, 1000);
 }
 
 window.addEventListener('click', function() {
