@@ -37,13 +37,10 @@ function formatTime(number) {
 var app = new Timer('#app', {
   data: {time: duration},
   template: function(props) {
-    // Display a restart button when time equals 0
-    if (props.time < 1) {
-      return `<p><button data-restart>Restart</button></p>`;
-    }
-
-    // Display the current time
-    return `<p class="time">${formatTime(props.time)}</p>`;
+    // Display the current time and buttons
+    return `
+      <p class="time">${formatTime(props.time)}</p>
+      <p><button data-restart>Restart</button></p>`;
   }
 });
 
@@ -84,6 +81,7 @@ function startTimer() {
 
 window.addEventListener('click', function() {
   if (event.target.matches('[data-restart]')) {
+    clearInterval(timer);
     startTimer();
   }
 });
