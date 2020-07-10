@@ -21,12 +21,12 @@ Timer.prototype.render = function() {
 /**
  * Format the time
  * @param   {Number} number The time in seconds
- * @returns {String} string The time in M:SS format
+ * @return  {String} string The time in M:SS format
  */
 function formatTime(number) {
   var minutes = Math.floor(number / 60);
-  var seconds = number % 60;
-  return `${minutes.toString()}:${seconds.toString().padStart(2, '0')}`;
+  var seconds = (number % 60).toString().padStart(2, '0');
+  return `${minutes}:${seconds}`;
 }
 
 /**
