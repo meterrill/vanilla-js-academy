@@ -1,4 +1,4 @@
-var duration = 20;
+var duration = 120;
 var timer;
 
 /**
@@ -89,17 +89,14 @@ function startTimer() {
   timer = setInterval(countdown, 1000);
 }
 
-window.addEventListener('click', function() {
+window.addEventListener('click', function(event) {
   if (event.target.matches('[data-reset]')) {
     // Reset the app data
     app.data.time = duration;
     app.data.paused = true;
 
-    // Clear the interval
-    clearInterval(timer);
-
-    // Start the Timer
-    startTimer();
+    // Stop the Timer
+    stopTimer();
   }
 
   if (event.target.matches('[data-pause]')) {
