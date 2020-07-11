@@ -1,4 +1,4 @@
-var duration = 120;
+var duration = 20;
 var timer;
 
 /**
@@ -37,14 +37,14 @@ function formatTime(number) {
 var app = new Timer('#app', {
   data: {
     time: duration,
-    isPaused: false
+    paused: true
   },
   template: function(props) {
     // Display the current time and buttons
     return `
       <p class="time">${formatTime(props.time)}</p>
       <p>
-        <button data-pause>${props.isPaused ? 'Start' : 'Pause'}</button>
+        <button data-pause>${props.paused ? 'Start' : 'Pause'}</button>
         <button data-reset>Reset</button>
       </p>
     `;
@@ -93,7 +93,7 @@ window.addEventListener('click', function() {
   if (event.target.matches('[data-reset]')) {
     // Reset the app data
     app.data.time = duration;
-    app.data.isPaused = false;
+    app.data.paused = true;
 
     // Clear the interval
     clearInterval(timer);
@@ -103,11 +103,11 @@ window.addEventListener('click', function() {
   }
 
   if (event.target.matches('[data-pause]')) {
-    // Toggle isPaused boolean
-    app.data.isPaused = app.data.isPaused ? false : true;
+    // Toggle paused boolean
+    app.data.paused = app.data.paused ? false : true;
 
     // Stop/start the Timer
-    if (app.data.isPaused) {
+    if (app.data.paused) {
       stopTimer();
     } else {
       startTimer();
@@ -115,4 +115,4 @@ window.addEventListener('click', function() {
   }
 });
 
-startTimer();
+app.render();
