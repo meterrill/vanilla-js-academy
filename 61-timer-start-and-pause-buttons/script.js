@@ -44,7 +44,7 @@ var app = new Timer('#app', {
     return `
       <p class="time">${formatTime(props.time)}</p>
       <p>
-        <button data-pause>${props.paused ? 'Start' : 'Pause'}</button>
+        <button data-pause ${props.time < 1 ? 'disabled' : ''}>${props.paused ? 'Start' : 'Pause'}</button>
         <button data-reset>Reset</button>
       </p>
     `;
