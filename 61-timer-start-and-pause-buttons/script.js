@@ -1,4 +1,4 @@
-var duration = 10;
+var duration = 120;
 var timer;
 
 /**
@@ -35,12 +35,19 @@ function formatTime(number) {
  * @param {Object}  props The component options
  */
 var app = new Timer('#app', {
-  data: {time: duration},
+  data: {
+    time: duration,
+    isPaused: false
+  },
   template: function(props) {
     // Display the current time and buttons
     return `
       <p class="time">${formatTime(props.time)}</p>
-      <p><button data-restart>Restart</button></p>`;
+      <p>
+        <button data-pause>${props.isPaused ? 'Start' : 'Pause'}</button>
+        <button data-restart>Restart</button>
+      </p>
+    `;
   }
 });
 
@@ -51,27 +58,30 @@ function countdown() {
   // Decrement the time by 1
   app.data.time--;
 
-  // Check if the Timer should be stopped
-  stopTimer();
+  // Clear the interval when time equals 0
+  if (app.data.time < 1) {
+    stopTimer();
+  }
   
   // Update the UI
   app.render();  
 }
 
+/**
+ * Stop the Timer
+ */
 function stopTimer() {
-  // Clear the interval when time equals 0
-  if (app.data.time < 1) {
-    clearInterval(timer);
-  }
+  // Clear the interval
+  clearInterval(timer);
+  
+  // Update the UI
+  app.render();
 }
 
 /**
  * Start the Timer
  */
 function startTimer() {
-  // Reset the app data
-  app.data.time = duration;
-
   // Render the Timer
   app.render();
 
@@ -81,8 +91,27 @@ function startTimer() {
 
 window.addEventListener('click', function() {
   if (event.target.matches('[data-restart]')) {
+    // Reset the app data
+    app.data.time = duration;
+    app.data.isPaused = false;
+
+    // Clear the interval
     clearInterval(timer);
+
+    // Start the Timer
     startTimer();
+  }
+
+  if (event.target.matches('[data-pause]')) {
+    // Toggle isPaused boolean
+    app.data.isPaused = app.data.isPaused ? false : true;
+
+    // Stop/start the Timer
+    if (app.data.isPaused) {
+      stopTimer();
+    } else {
+      startTimer();
+    }
   }
 });
 
