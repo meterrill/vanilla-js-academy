@@ -45,7 +45,7 @@ var app = new Timer('#app', {
       <p class="time">${formatTime(props.time)}</p>
       <p>
         <button data-pause>${props.isPaused ? 'Start' : 'Pause'}</button>
-        <button data-restart>Restart</button>
+        <button data-reset>Reset</button>
       </p>
     `;
   }
@@ -90,7 +90,7 @@ function startTimer() {
 }
 
 window.addEventListener('click', function() {
-  if (event.target.matches('[data-restart]')) {
+  if (event.target.matches('[data-reset]')) {
     // Reset the app data
     app.data.time = duration;
     app.data.isPaused = false;
