@@ -5,23 +5,22 @@ var timer;
  * Handle proxy changes
  * @param  {Constructor} instance The constructor instance
  */
-function handler() {
+function handler(instance) {
   return {
 		get: function (obj, prop) {
-			console.log('got it!');
 			if (['[object Object]', '[object Array]'].indexOf(Object.prototype.toString.call(obj[prop])) > -1) {
-				return new Proxy(obj[prop], handler());
+				return new Proxy(obj[prop], handler(instance));
 			}
 			return obj[prop];
 		},
 		set: function (obj, prop, value) {
-			console.log('set it');
 			obj[prop] = value;
+			instance.render();
 			return true;
 		},
 		deleteProperty: function (obj, prop) {
-			console.log('delete it');
 			delete obj[prop];
+			instance.render();
 			return true;
 		}
   };
@@ -34,7 +33,7 @@ function handler() {
  */
 function Timer(selector, options) {
   this.element = document.querySelector(selector);
-  this.data = new Proxy(options.data, handler());
+  this.data = new Proxy(options.data, handler(this));
   this.template = options.template;
 };
 
@@ -88,9 +87,6 @@ function countdown() {
   if (app.data.time < 1) {
     stopTimer();
   }
-  
-  // Update the UI
-  app.render();  
 }
 
 /**
@@ -99,18 +95,12 @@ function countdown() {
 function stopTimer() {
   // Clear the interval
   clearInterval(timer);
-  
-  // Update the UI
-  app.render();
 }
 
 /**
  * Start the Timer
  */
 function startTimer() {
-  // Render the Timer
-  app.render();
-
   // Start the Timer
   timer = setInterval(countdown, 1000);
 }
@@ -138,4 +128,5 @@ window.addEventListener('click', function(event) {
   }
 });
 
+// Render the initial UI
 app.render();
