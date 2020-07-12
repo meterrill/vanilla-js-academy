@@ -2,8 +2,9 @@ var duration = 120;
 var timer;
 
 /**
- * Handle proxy changes
- * @param  {Constructor} instance The constructor instance
+ * Create a handler object for new Proxy objects
+ * @param   {Object} instance The current instance of Timer
+ * @returns {Object}          The handler object
  */
 function handler(instance) {
   return {
@@ -47,7 +48,7 @@ Timer.prototype.render = function() {
 /**
  * Format the time
  * @param   {Number} number The time in seconds
- * @return  {String} string The time in M:SS format
+ * @returns {String} string The time in M:SS format
  */
 function formatTime(number) {
   var minutes = Math.floor(number / 60);
