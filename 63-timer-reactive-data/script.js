@@ -34,8 +34,20 @@ function handler(instance) {
  */
 function Timer(selector, options) {
   this.element = document.querySelector(selector);
-  this.data = new Proxy(options.data, handler(this));
+  var _data = new Proxy(options.data, handler(this));
   this.template = options.template;
+
+  // Define getter and setter for data
+  Object.defineProperty(this, 'data', {
+    get: function() {
+      return _data;
+    },
+    set: function(data) {
+      _data = new Proxy(data, handler(this));
+      this.render();
+      return true;
+    }
+  });
 };
 
 /**
