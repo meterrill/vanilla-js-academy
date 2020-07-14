@@ -4,15 +4,17 @@ var endpoint = 'https://vanillajsacademy.com/api/places.json';
  * Create a new Reef instance
  */
 var app = new Reef('#app', {
-  data: {
-    greeting: 'Hello'
-  },
+  data: {},
   template: function(props) {
-    return `<p>${props.greeting}</p>`;
+    return `
+      <ul>
+        ${props.places.map(function(place) {
+          return `<li>${place.place}</li>`;
+        }).join('')}
+      </ul>
+    `;
   }
 });
-
-app.render();
 
 /**
  * Get the data from the API
@@ -20,7 +22,7 @@ app.render();
 fetch(endpoint).then(function(response) {
   return response.ok ? response.json() : Promise.reject(response);
 }).then(function(data) {
-  console.log(data);
+  app.data.places = (data);
 }).catch(function(error) {
   console.warn('Something went wrong.', error);
 });
