@@ -6,13 +6,10 @@ var endpoint = 'https://vanillajsacademy.com/api/places.json';
 var app = new Reef('#app', {
   data: {},
   template: function(props) {
-    return `
-      <ul>
-        ${props.places.map(function(place) {
-          return `<li>${place.place}</li>`;
-        }).join('')}
-      </ul>
-    `;
+    // Display places
+    if (props.places && props.places.length) {
+      return getPlacesHTML(props);
+    }
   }
 });
 
@@ -27,6 +24,21 @@ function getPlaces() {
   }).catch(function(error) {
     console.warn('Something went wrong.', error);
   });
+}
+
+/**
+ * Create HTML for the places
+ * @param   {Object} props The places data
+ * @returns {String}       The HTML
+ */
+function getPlacesHTML(props) {
+  return `
+    <ul>
+      ${props.places.map(function(place) {
+        return `<li>${place.place}</li>`;
+      }).join('')}
+    </ul>
+  `;
 }
 
 getPlaces();
