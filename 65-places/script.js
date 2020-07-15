@@ -10,6 +10,9 @@ var app = new Reef('#app', {
     if (props.places && props.places.length) {
       return getPlacesHTML(props);
     }
+
+    // Display error
+    return getNoPlacesHTML();
   }
 });
 
@@ -22,7 +25,8 @@ function getPlaces() {
   }).then(function(data) {
     app.data.places = (data);
   }).catch(function(error) {
-    console.warn('Something went wrong.', error);
+    console.warn(error);
+    app.data.place = null;
   });
 }
 
@@ -39,6 +43,14 @@ function getPlacesHTML(props) {
       }).join('')}
     </ul>
   `;
+}
+
+/**
+ * Create HTML for no places
+ * @returns {String}  The HTML
+ */
+function getNoPlacesHTML() {
+  return `<p><em>Sorry, we're unable to find any places right now. Please try again later.</em></p>`;
 }
 
 getPlaces();
