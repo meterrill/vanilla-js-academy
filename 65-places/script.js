@@ -19,10 +19,14 @@ var app = new Reef('#app', {
 /**
  * Get the data from the API
  */
-fetch(endpoint).then(function(response) {
-  return response.ok ? response.json() : Promise.reject(response);
-}).then(function(data) {
-  app.data.places = (data);
-}).catch(function(error) {
-  console.warn('Something went wrong.', error);
-});
+function getPlaces() {
+  fetch(endpoint).then(function(response) {
+    return response.ok ? response.json() : Promise.reject(response);
+  }).then(function(data) {
+    app.data.places = (data);
+  }).catch(function(error) {
+    console.warn('Something went wrong.', error);
+  });
+}
+
+getPlaces();
