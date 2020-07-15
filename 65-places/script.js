@@ -36,13 +36,20 @@ function getPlaces() {
  * @returns {String}       The HTML
  */
 function getPlacesHTML(props) {
-  return `
-    <ul>
-      ${props.places.map(function(place) {
-        return `<li>${place.place}</li>`;
-      }).join('')}
-    </ul>
-  `;
+  return `${props.places.map(function(place) {
+    return `<article>
+      <div>
+        <img src="${place.img}" alt="">
+      </div>
+      <div>
+        <h2>
+          <a href="${place.url}">${place.place}</a>
+        </h2>
+        <p>${place.description}</p>
+        <address>${place.location}</address>
+      </div>
+    </article>`;
+  }).join('')}`;
 }
 
 /**
