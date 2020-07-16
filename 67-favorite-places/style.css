@@ -13,6 +13,12 @@ article {
   margin-bottom: 2em;
 }  
 
+article header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 article h2 {
   padding: 0;
   margin-bottom: 0 0 .5em;
@@ -25,6 +31,18 @@ article h2 a {
 article h2 a:hover {
   text-decoration: underline;
 }  
+
+.favorite {
+  min-width: 1.875rem;
+  min-height: 1.875rem;
+  padding: 0;
+  border: none;
+  background-color: unset;
+}
+
+.favorite .fa {
+  font-size: 1.5em;
+}
 
 p {
   margin: 0 0 1em;
