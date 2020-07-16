@@ -1,0 +1,40 @@
+body {
+  margin: 1em auto;
+  max-width: 60em;
+  width: 88%;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+article {
+  margin-bottom: 2em;
+}  
+
+article h2 {
+  padding: 0;
+  margin-bottom: 0 0 .5em;
+}  
+
+article h2 a {
+  text-decoration: none;
+}  
+
+article h2 a:hover {
+  text-decoration: underline;
+}  
+
+p {
+  margin: 0 0 1em;
+}  
+
+@media(min-width: 900px) {
+  article {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr;
+    grid-column-gap: 2em;
+  }
+}
