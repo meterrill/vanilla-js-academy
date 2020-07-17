@@ -1,6 +1,9 @@
 // Save the API endpoint
 var endpoint = 'https://vanillajsacademy.com/api/places.json';
 
+// Save the localStorage key
+var storageID = 'favoritePlaces';
+
 /**
  * Add the favorite property to the places data
  * @param   {Object}  places         The places data
@@ -12,6 +15,43 @@ function addFavoriteProperty(places) {
   });
 
   return updatedPlaces;
+}
+
+/**
+ * Save the favorites object to localStorage
+ * @param {String} index The index of the place
+ */
+function saveFavorites(index) {
+  // Get an ID for the place
+  var id = app.data.places[index].id;
+
+  // Get the favorites object from localStorage
+  var favorites = localStorage.getItem(storageID);
+  favorites = favorites ? JSON.parse(favorites) : {};
+
+  // Add the place to the favorites object
+  favorites[id] = app.data.places[index].favorite;
+
+  // Save the favorites object to localStorage
+  localStorage.setItem(storageID, JSON.stringify(favorites));
+}
+
+/**
+ * Toggle the favorite button
+ * @param {Object} event The event object
+ */
+function toggleFavorite(event) {
+  // If the event target has and attribute of data-index
+  if (event.target.closest('[data-index]')) {
+    // Get the value of data-index
+    var index = event.target.closest('[data-index]').getAttribute('data-index');
+
+    // Toggle the value of the favorite property
+    app.data.places[index].favorite = app.data.places[index].favorite ? false : true;
+    
+    // Save the favorites to localStorage
+    saveFavorites(index);
+  }
 }
 
 /**
@@ -65,21 +105,6 @@ function getPlacesHTML(props) {
  */
 function getNoPlacesHTML() {
   return `<p><em>Sorry, we're unable to find any places right now. Please try again later.</em></p>`;
-}
-
-/**
- * Toggle the favorite button
- * @param {Object} event The event object
- */
-function toggleFavorite(event) {
-  // If the event target has and attribute of data-index
-  if (event.target.closest('[data-index]')) {
-    // Get the value of data-index
-    var index = event.target.closest('[data-index]').getAttribute('data-index');
-    
-    // Toggle the value of the favorite property
-    app.data.places[index].favorite = app.data.places[index].favorite ? false : true;
-  }
 }
 
 /**
