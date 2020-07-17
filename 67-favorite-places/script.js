@@ -37,7 +37,7 @@ function getPlaces() {
  * @returns {String}       The HTML
  */
 function getPlacesHTML(props) {
-  return `${props.places.map(function(place) {
+  return `${props.places.map(function(place, index) {
     return `<article>
       <div>
         <img src="${place.img}" alt="">
@@ -47,8 +47,8 @@ function getPlacesHTML(props) {
           <h2>
             <a href="${place.url}">${place.place}</a>
           </h2>
-          <button class="favorite" aria-label="Save ${place.place} to favorites" aria-pressed="${place.favorite}">
-            <i class="fa fa-heart-o" aria-hidden="true"></i>
+          <button class="favorite" aria-label="Save ${place.place} to favorites" aria-pressed="${place.favorite}" data-index="${index}">
+            <i class="fa fa-heart${place.favorite ? '' : '-o'}" aria-hidden="true"></i>
           </button>
         </header>
         <p>${place.description}</p>
@@ -79,6 +79,13 @@ var app = new Reef('#app', {
 
     // Display error
     return getNoPlacesHTML();
+  }
+});
+
+window.addEventListener('click', function(event) {
+  if (event.target.closest('[data-index]')) {
+    var index = event.target.closest('[data-index]').getAttribute('data-index');
+    app.data.places[index].favorite = app.data.places[index].favorite ? false : true;
   }
 });
 
