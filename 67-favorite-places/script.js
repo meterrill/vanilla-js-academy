@@ -1,3 +1,4 @@
+// Save the API endpoint
 var endpoint = 'https://vanillajsacademy.com/api/places.json';
 
 /**
@@ -67,6 +68,21 @@ function getNoPlacesHTML() {
 }
 
 /**
+ * Toggle the favorite button
+ * @param {Object} event The event object
+ */
+function toggleFavorite(event) {
+  // If the event target has and attribute of data-index
+  if (event.target.closest('[data-index]')) {
+    // Get the value of data-index
+    var index = event.target.closest('[data-index]').getAttribute('data-index');
+    
+    // Toggle the value of the favorite property
+    app.data.places[index].favorite = app.data.places[index].favorite ? false : true;
+  }
+}
+
+/**
  * Create a new Reef instance
  */
 var app = new Reef('#app', {
@@ -82,11 +98,7 @@ var app = new Reef('#app', {
   }
 });
 
-window.addEventListener('click', function(event) {
-  if (event.target.closest('[data-index]')) {
-    var index = event.target.closest('[data-index]').getAttribute('data-index');
-    app.data.places[index].favorite = app.data.places[index].favorite ? false : true;
-  }
-});
-
 getPlaces();
+
+// Listen for clicks on favorite buttons
+window.addEventListener('click', toggleFavorite);
