@@ -9,10 +9,25 @@ var storageID = 'favoritePlaces';
  * @param   {Object}  places         The places data
  * @returns {Object}  updatedPlaces  The places data with the favorite property
  */
-function addFavoriteProperty(places) {
-  var updatedPlaces = places.map(function(place) {
-    place.favorite = false;
-  });
+function getFavorites(places) {
+  // Get the favorites object from localStorage
+  var favorites = JSON.parse(localStorage.getItem(storageID));
+
+  if (!favorites) {
+    // If there are no saved favorites, add the favorite property
+    var updatedPlaces = places.map(function(place) {
+      place.favorite = false;
+    });
+  } else {
+    // Add the favorites from localStorage
+    var updatedPlaces = places.map(function(place) {
+      // Get an ID for the place
+      var id = place.id;
+
+      // Get the value from the favorites object
+      place.favorite = favorites[id];
+    });
+  }
 
   return updatedPlaces;
 }
@@ -62,7 +77,7 @@ function getPlaces() {
     return response.ok ? response.json() : Promise.reject(response);
   }).then(function(data) {
     // Add the favorite property to the API data
-    addFavoriteProperty(data);
+    getFavorites(data);
 
     // Update the app data
     app.data.places = (data);
