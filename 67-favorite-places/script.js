@@ -103,7 +103,7 @@ function getPlacesHTML(props) {
           <h2>
             <a href="${place.url}">${place.place}</a>
           </h2>
-          <button class="favorite" aria-label="Save ${place.place} to favorites" aria-pressed="${place.favorite}" data-index="${index}">
+          <button data-index="${index}" aria-label="Save ${place.place} to favorites" aria-pressed="${place.favorite}">
             <i class="fa fa-heart${place.favorite ? '' : '-o'}" aria-hidden="true"></i>
           </button>
         </header>
