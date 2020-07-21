@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore - Filter</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Explore</h1>
+  <p>Explore cool, quirky places in Rhode Island.</p>
+  
+  <div class="filters">
+		<strong>Filter:</strong>
+		<label>
+			<input type="radio" name="view" value="all" checked>
+			All Places
+		</label>
+
+		<label>
+			<input type="radio" name="view" value="faves">
+			Favorites
+		</label>
+
+		<label>
+			<input type="radio" name="view" value="visited">
+			Visited
+		</label>
+
+		<label>
+			<input type="radio" name="view" value="not-visited">
+			Not Visited
+		</label>
+	</div>
+
+  <div id="app">Loading...</div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/reefjs@7/dist/reef.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

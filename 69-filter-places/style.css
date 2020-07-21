@@ -1,0 +1,66 @@
+body {
+  margin: 1em auto;
+  max-width: 60em;
+  width: 88%;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.filters {
+  margin-bottom: 1em;
+}
+
+article {
+  margin-bottom: 2em;
+}  
+
+article header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+article h2 {
+  padding: 0;
+  margin-bottom: 0 0 .5em;
+}  
+
+article h2 a {
+  text-decoration: none;
+}  
+
+article h2 a:hover {
+  text-decoration: underline;
+}  
+
+button {
+  min-width: 1.875rem;
+  min-height: 1.875rem;
+  padding: 0;
+  border: none;
+  background-color: unset;
+}
+
+button .fa {
+  font-size: 1.5em;
+}
+
+button[aria-pressed="true"] .fa {
+  color: red;
+}
+
+p {
+  margin: 0 0 1em;
+}  
+
+@media(min-width: 900px) {
+  article {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr;
+    grid-column-gap: 2em;
+  }
+}
