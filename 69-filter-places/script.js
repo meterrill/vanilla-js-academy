@@ -1,42 +1,48 @@
 // Save the API endpoint
 var endpoint = 'https://vanillajsacademy.com/api/places.json';
 
-// Save the localStorage key
-var storageID = 'favoritePlaces';
+// Save the localStorage keys
+var favoritesID = 'favoritePlaces';
+var visitedID = 'visitedPlaces';
 
 /**
- * Add the favorites object to the data
- * @returns {Object}  favorites  The favorites object
+ * Get the saved object from localStorage
+ * @param   {String}  key    The localStorage key
+ * @returns {Object}  saved  The saved object
  */
-function getFavorites() {
-  // Get the favorites object from localStorage
-  var favorites = JSON.parse(localStorage.getItem(storageID));
+function getFromStorage(key) {
+  // Get the saved object from localStorage
+  var saved = JSON.parse(localStorage.getItem(key));
 
-  // Return the favorites object
-  return favorites ? favorites: {};
+  // Return the saved object
+  return saved ? saved: {};
 }
 
 /**
- * Save the favorites object to localStorage
- * @param {Object} favorites The favorites object
+ * Save the object to localStorage
+ * @param {String} key    The localStorage key
+ * @param {Object} object The object to save
  */
-function saveFavorites(favorites) {
-  // Save the favorites object to localStorage
-  localStorage.setItem(storageID, JSON.stringify(favorites));
+function saveToStorage(key, object) {
+  // Save the object to localStorage
+  localStorage.setItem(key, JSON.stringify(object));
 }
 
 /**
- * Toggle the favorite button
+ * Handle click events
  * @param {Object} event The event object
  */
-function toggleFavorite(event) {
-  // If the event target has an attribute of data-id
-  if (event.target.closest('[data-id]')) {
+function clickHandler(event) {
+  // If the event target has an attribute of data-object
+  if (event.target.closest('[data-object]')) {
+    // Get the value of data-object
+    var object = event.target.closest('[data-object]').getAttribute('data-object');
+
     // Get the value of data-id
     var id = event.target.closest('[data-id]').getAttribute('data-id');
 
     // Toggle the place's favorites value
-    app.data.favorites[id] = app.data.favorites[id] ? false : true;
+    app.data[object][id] = app.data[object][id] ? false : true;
   }
 }
 
@@ -46,7 +52,10 @@ function toggleFavorite(event) {
  */
 function renderHandler(event) {
   // Save the favorites object to localStorage
-  saveFavorites(app.data.favorites);
+  saveToStorage(favoritesID, app.data.favorites);
+
+  // Save the visited object to localStorage
+  saveToStorage(visitedID, app.data.visited);
 }
 
 /**
@@ -57,7 +66,10 @@ function getPlaces() {
     return response.ok ? response.json() : Promise.reject(response);
   }).then(function(data) {
     // Add the favorites object to the API data
-    app.data.favorites = getFavorites();
+    app.data.favorites = getFromStorage(favoritesID);
+
+    // Add the visited object to the API data
+    app.data.visited = getFromStorage(visitedID);
 
     // Update the app data
     app.data.places = data;
@@ -83,9 +95,14 @@ function getPlacesHTML(props) {
           <h2>
             <a href="${place.url}">${place.place}</a>
           </h2>
-          <button data-id="${place.id}" aria-label="Save ${place.place} to favorites" aria-pressed="${props.favorites[place.id]}">
-            <i class="fa fa-heart${props.favorites[place.id] ? '' : '-o'}" aria-hidden="true"></i>
-          </button>
+          <div>
+            <button data-object="favorites" data-id="${place.id}" aria-label="Save ${place.place} to favorites" aria-pressed="${props.favorites[place.id]}">
+              <i class="fa fa-heart${props.favorites[place.id] ? '' : '-o'}" aria-hidden="true"></i>
+            </button>
+            <button data-object="visited" data-id="${place.id}" aria-label="Save ${place.place} to visited" aria-pressed="${props.visited[place.id]}">
+              <i class="fa fa-${props.visited[place.id] ? 'check-' : ''}square-o" aria-hidden="true"></i>
+            </button>
+          </div>
         </header>
         <p>${place.description}</p>
         <address>${place.location}</address>
@@ -120,8 +137,8 @@ var app = new Reef('#app', {
 
 getPlaces();
 
-// Listen for clicks on favorite buttons
-window.addEventListener('click', toggleFavorite);
+// Listen for clicks on buttons
+window.addEventListener('click', clickHandler);
 
 // Listen for updates to the DOM
 window.addEventListener('render', renderHandler);

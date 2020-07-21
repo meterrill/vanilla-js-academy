@@ -48,8 +48,12 @@ button .fa {
   font-size: 1.5em;
 }
 
-button[aria-pressed="true"] .fa {
+button[data-object="favorites"][aria-pressed="true"] .fa {
   color: red;
+}
+
+button[data-object="visited"][aria-pressed="true"] .fa {
+  padding-left: 2.86px;
 }
 
 p {
