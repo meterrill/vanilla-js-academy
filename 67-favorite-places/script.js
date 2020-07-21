@@ -5,48 +5,22 @@ var endpoint = 'https://vanillajsacademy.com/api/places.json';
 var storageID = 'favoritePlaces';
 
 /**
- * Add the favorite property to the places data
- * @param   {Object}  places         The places data
- * @returns {Object}  updatedPlaces  The places data with the favorite property
+ * Add the favorites object to the data
+ * @returns {Object}  favorites  The favorites object
  */
-function getFavorites(places) {
+function getFavorites() {
   // Get the favorites object from localStorage
   var favorites = JSON.parse(localStorage.getItem(storageID));
 
-  if (!favorites) {
-    // If there are no saved favorites, add the favorite property
-    var updatedPlaces = places.map(function(place) {
-      place.favorite = false;
-    });
-  } else {
-    // Add the favorites from localStorage
-    var updatedPlaces = places.map(function(place) {
-      // Get an ID for the place
-      var id = place.id;
-
-      // Get the value from the favorites object
-      place.favorite = favorites[id];
-    });
-  }
-
-  return updatedPlaces;
+  // Return the favorites object
+  return favorites ? favorites: {};
 }
 
 /**
  * Save the favorites object to localStorage
- * @param {String} index The index of the place
+ * @param {Object} favorites The favorites object
  */
-function saveFavorites(index) {
-  // Get an ID for the place
-  var id = app.data.places[index].id;
-
-  // Get the favorites object from localStorage
-  var favorites = localStorage.getItem(storageID);
-  favorites = favorites ? JSON.parse(favorites) : {};
-
-  // Add the place to the favorites object
-  favorites[id] = app.data.places[index].favorite;
-
+function saveFavorites(favorites) {
   // Save the favorites object to localStorage
   localStorage.setItem(storageID, JSON.stringify(favorites));
 }
@@ -56,16 +30,16 @@ function saveFavorites(index) {
  * @param {Object} event The event object
  */
 function toggleFavorite(event) {
-  // If the event target has and attribute of data-index
-  if (event.target.closest('[data-index]')) {
-    // Get the value of data-index
-    var index = event.target.closest('[data-index]').getAttribute('data-index');
+  // If the event target has an attribute of data-id
+  if (event.target.closest('[data-id]')) {
+    // Get the value of data-id
+    var id = event.target.closest('[data-id]').getAttribute('data-id');
 
-    // Toggle the value of the favorite property
-    app.data.places[index].favorite = app.data.places[index].favorite ? false : true;
+    // Toggle the place's favorites value
+    app.data.favorites[id] = app.data.favorites[id] ? false : true;
     
-    // Save the favorites to localStorage
-    saveFavorites(index);
+    // Save the favorites object to localStorage
+    saveFavorites(app.data.favorites);
   }
 }
 
@@ -76,11 +50,11 @@ function getPlaces() {
   fetch(endpoint).then(function(response) {
     return response.ok ? response.json() : Promise.reject(response);
   }).then(function(data) {
-    // Add the favorite property to the API data
-    getFavorites(data);
+    // Add the favorites object to the API data
+    app.data.favorites = getFavorites();
 
     // Update the app data
-    app.data.places = (data);
+    app.data.places = data;
   }).catch(function(error) {
     console.warn(error);
     app.data.place = null;
@@ -93,7 +67,7 @@ function getPlaces() {
  * @returns {String}       The HTML
  */
 function getPlacesHTML(props) {
-  return `${props.places.map(function(place, index) {
+  return `${props.places.map(function(place) {
     return `<article>
       <div>
         <img src="${place.img}" alt="">
@@ -103,8 +77,8 @@ function getPlacesHTML(props) {
           <h2>
             <a href="${place.url}">${place.place}</a>
           </h2>
-          <button data-index="${index}" aria-label="Save ${place.place} to favorites" aria-pressed="${place.favorite}">
-            <i class="fa fa-heart${place.favorite ? '' : '-o'}" aria-hidden="true"></i>
+          <button data-id="${place.id}" aria-label="Save ${place.place} to favorites" aria-pressed="${props.favorites[place.id]}">
+            <i class="fa fa-heart${props.favorites[place.id] ? '' : '-o'}" aria-hidden="true"></i>
           </button>
         </header>
         <p>${place.description}</p>
