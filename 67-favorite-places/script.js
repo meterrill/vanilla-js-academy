@@ -37,10 +37,16 @@ function toggleFavorite(event) {
 
     // Toggle the place's favorites value
     app.data.favorites[id] = app.data.favorites[id] ? false : true;
-    
-    // Save the favorites object to localStorage
-    saveFavorites(app.data.favorites);
   }
+}
+
+/**
+ * Handle render events
+ * @param {Event} event The event object
+ */
+function renderHandler(event) {
+  // Save the favorites object to localStorage
+  saveFavorites(app.data.favorites);
 }
 
 /**
@@ -116,3 +122,6 @@ getPlaces();
 
 // Listen for clicks on favorite buttons
 window.addEventListener('click', toggleFavorite);
+
+// Listen for updates to the DOM
+window.addEventListener('render', renderHandler);
