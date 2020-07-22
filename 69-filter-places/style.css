@@ -61,7 +61,7 @@ p {
 }  
 
 @media(min-width: 900px) {
-  article {
+  article:not([hidden]) {
     display: grid;
     grid-template-columns: 1fr 2fr;
     grid-template-rows: 1fr;
